@@ -1,4 +1,4 @@
-package pl.coderslab.equity;
+package pl.coderslab.tradeeq;
 
 import java.util.List;
 

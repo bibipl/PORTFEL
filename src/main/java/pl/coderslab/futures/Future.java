@@ -13,18 +13,18 @@ public class Future {
     private Long id;
     private String name;
     private String isin;
-    private int mutliplier;
+    private double mutliplier;
     private LocalDate expirationDate;
     private String description;
     @OneToOne
-    private Account account; // !!! to update valuation we need account account.
+    private Account account;            // !!! to update valuation we need account account.
 
     @Transient
-    private double price;           // temporary keeps last available price
+    private double price;               // temporary keeps last available price
     @Transient
-    private LocalDate priceDate;       // temporary keeps date of last available price
+    private LocalDate priceDate;        // temporary keeps date of last available price
     @Transient
-    private double numberOfContracts;    // temporary keeps last number of shares
+    private double numberOfContracts;   // temporary keeps last number of shares
     @Transient
     private double exposure;
 
@@ -55,11 +55,11 @@ public class Future {
         this.isin = isin;
     }
 
-    public int getMutliplier() {
+    public double getMutliplier() {
         return mutliplier;
     }
 
-    public void setMutliplier(int mutliplier) {
+    public void setMutliplier(double mutliplier) {
         this.mutliplier = mutliplier;
     }
 
@@ -118,4 +118,5 @@ public class Future {
     public void setExposure(double exposure) {
         this.exposure = exposure;
     }
+
 }

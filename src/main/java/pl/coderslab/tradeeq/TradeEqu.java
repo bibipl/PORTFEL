@@ -1,5 +1,7 @@
-package pl.coderslab.equity;
+package pl.coderslab.tradeeq;
 
+
+import pl.coderslab.equity.Equity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -29,7 +31,6 @@ public class TradeEqu {
         public enum TransEquType {
             KUPNO, SPRZEDAŻ, DYWIDENDA
         }
-
 
 
         public TradeEqu() {
@@ -105,5 +106,13 @@ public class TradeEqu {
 
         public void setTransType(TransEquType transType) {
                 this.transType = transType;
+        }
+
+        public Equity getEquity() {
+                return equity;
+        }
+
+        public void setEquity(Equity equity) {
+                this.equity = equity;
         }
 }

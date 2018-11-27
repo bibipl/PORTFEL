@@ -1,8 +1,10 @@
-package pl.coderslab.equity;
+package pl.coderslab.tradeeq;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.coderslab.tradeFu.TradeFutRepository;
+import pl.coderslab.tradeFu.TradeFutService;
 
 import java.util.List;
 

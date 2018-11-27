@@ -1,6 +1,6 @@
 package pl.coderslab.account;
 
-import pl.coderslab.equity.TradeEqu;
+import pl.coderslab.tradeeq.TradeEqu;
 
 import javax.persistence.*;
 import java.time.LocalDate;

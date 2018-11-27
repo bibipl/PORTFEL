@@ -1,4 +1,4 @@
-package pl.coderslab.equity;
+package pl.coderslab.tradeeq;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

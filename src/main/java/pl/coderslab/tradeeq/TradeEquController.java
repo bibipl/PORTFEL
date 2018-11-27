@@ -1,4 +1,4 @@
-package pl.coderslab.equity;
+package pl.coderslab.tradeeq;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,9 +14,17 @@ public class TradeEquController {
 
     @Autowired
     TradeEquService tradeEquService;
+
     @GetMapping("/list")
     public String findAll(Model model) {
         List<TradeEqu> eqTrades = tradeEquService.findAll();
+        for (TradeEqu tradeEqu : eqTrades) {
+            double price = tradeEqu.getPrice();
+            double number = tradeEqu.getNumber();
+            if (number != 0 && price !=0) {
+                tradeEqu.setValue(number*price);
+            }
+        }
         model.addAttribute("eqTrades", eqTrades);
         return "showTradesEqu";
     }

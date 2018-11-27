@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.LocalDate;
 import java.util.List;
+
 @Controller
 @RequestMapping("/equ")
 public class EquityController {
@@ -24,7 +25,6 @@ public class EquityController {
         model.addAttribute("equities", equities);
         return "showEquities";
     }
-
 
 }
 

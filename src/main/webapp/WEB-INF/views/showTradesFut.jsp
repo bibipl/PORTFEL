@@ -9,7 +9,7 @@
 
 <body>
 <div class=leftright>
-    <h3 class="header">TRANSAKCJE NA AKCJACH</h3>
+    <h3 class="header">TRANSAKCJE NA KONTRAKTACH</h3>
     <div class="card">
         <div class="card-body">
             <table class="table table-striped">
@@ -20,25 +20,25 @@
                     <th>CENA</th>
                     <th>LICZBA</th>
                     <th>PROWIZJA</th>
-                    <th>WARTOŚĆ</th>
+                    <th>EKSPOZYCJA</th>
                     <th>TRANSAKCJA</th>
                     <th>ROZLICZENIE</th>
                     <th>KOMENTARZ</th>
                     <th style="width:20%">Zmiany</th>
 
                 </tr>
-                <c:forEach var="eqTrade" items="${eqTrades}">
+                <c:forEach var="fuTrade" items="${fuTrades}">
                     <tr>
-                        <td><strong>${eqTrade.equity.name}</strong></td>
-                        <td>${eqTrade.equity.isin}</td>
-                        <td>${eqTrade.transType}</td>
-                        <td>${eqTrade.price}</td>
-                        <td>${eqTrade.number}</td>
-                        <td>${eqTrade.commision}</td>
-                        <td>${eqTrade.value}</td>
-                        <td>${eqTrade.tradeDate}</td>
-                        <td>${eqTrade.settlementDate}</td>
-                        <td>${eqTrade.description}</td>
+                        <td><strong>${fuTrade.future.name}</strong></td>
+                        <td>${fuTrade.future.isin}</td>
+                        <td>${fuTrade.transFutType}</td>
+                        <td>${fuTrade.price}</td>
+                        <td>${fuTrade.number}</td>
+                        <td>${fuTrade.commision}</td>
+                        <td>${fuTrade.exposure}</td>
+                        <td>${fuTrade.tradeDate}</td>
+                        <td>${fuTrade.settlementDate}</td>
+                        <td>${fuTrade.description}</td>
                         <td>
                             <a href="/acc/refresh" class="btn btn-success">Akt</a>
                             <a href="/acc/update/${account.id}" class="btn btn-success">Edy</a>
