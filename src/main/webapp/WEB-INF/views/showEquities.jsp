@@ -2,37 +2,40 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>KONTA</title>
+    <title>AKCJE</title>
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
 </head>
 
 <body>
 <div class="container">
-    <h3 class="header">Konta</h3>
+    <h3 class="header">AKCJE</h3>
     <div class="card">
         <div class="card-body">
 
-            <table class="table">
-                <thead class="thead-dark">
+            <table class="table table-striped">
                 <tr>
-                    <th>Nazwa konta</th>
-                    <th>Data ostatniej operacji</th>
-                    <th>Stan konta</th>
+                    <th>Nazwa</th>
+                    <th>ISIN</th>
+                    <th>Data wyceny</th>
+                    <th>Cena</th>
+                    <th>Liczba</th>
+                    <th>Wartość</th>
                     <th>Opis</th>
-                    <th style="width:25%">Zmiany</th>
+                    <th style="width:20%">Zmiany</th>
 
                 </tr>
-                </thead>
-                <c:forEach var="account" items="${accounts}">
+                <c:forEach var="equity" items="${equities}">
                     <tr>
-                        <td><strong>${account.name}</strong></td>
-                        <td>${account.date}</td>
-                        <td>${account.value}</td>
-                        <td>${account.description}</td>
+                        <td><strong>${equity.name}</strong></td>
+                        <td>${equity.isin}</td>
+                        <td>${equity.priceDate}</td>
+                        <td>${equity.price}</td>
+                        <td>${equity.numberOfShares}</td>
+                        <td>${equity.value}</td>
+                        <td>${equity.description}</td>
                         <td>
                             <a href="/acc/refresh" class="btn btn-success">Akt</a>
-                            <a href="/acc/refresh" class="btn btn-success">Hist</a>
                             <a href="/acc/update/${account.id}" class="btn btn-success">Edy</a>
                             <a href="/acc/delete/${account.id}" class="btn btn-danger">Usuń</a>
                         </td>
@@ -44,4 +47,5 @@
 </div>
 </body>
 </html>
+
 

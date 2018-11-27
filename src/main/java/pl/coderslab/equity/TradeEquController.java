@@ -1,4 +1,4 @@
-package pl.coderslab.account;
+package pl.coderslab.equity;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,16 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/acc")
-public class AccountController {
+@RequestMapping("/traeq")
+public class TradeEquController {
 
     @Autowired
-    private AccountService accountService;
-
+    TradeEquService tradeEquService;
     @GetMapping("/list")
     public String findAll(Model model) {
-        List<Account> accounts = accountService.findAll();
-        model.addAttribute("accounts", accounts);
-        return "showAccounts";
+        List<TradeEqu> eqTrades = tradeEquService.findAll();
+        model.addAttribute("eqTrades", eqTrades);
+        return "showTradesEqu";
     }
 }

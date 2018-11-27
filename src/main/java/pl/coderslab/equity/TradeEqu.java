@@ -16,11 +16,94 @@ public class TradeEqu {
         private double commision;
         private String description;
 
+        @ManyToOne
+        private Equity equity;
+
+        @Transient
+        double value;
+
         @Enumerated(EnumType.STRING)
-        @Column(length = 8)
+        @Column(length = 10)
         TransEquType transType;
 
         public enum TransEquType {
-            KUP, SPRZEDAJ, DYWIDENDA
+            KUPNO, SPRZEDAŻ, DYWIDENDA
+        }
+
+
+
+        public TradeEqu() {
+        }
+
+        public Long getId() {
+                return id;
+        }
+
+        public void setId(Long id) {
+                this.id = id;
+        }
+
+        public LocalDate getTradeDate() {
+                return tradeDate;
+        }
+
+        public void setTradeDate(LocalDate tradeDate) {
+                this.tradeDate = tradeDate;
+        }
+
+        public LocalDate getSettlementDate() {
+                return settlementDate;
+        }
+
+        public void setSettlementDate(LocalDate settlementDate) {
+                this.settlementDate = settlementDate;
+        }
+
+        public double getPrice() {
+                return price;
+        }
+
+        public void setPrice(double price) {
+                this.price = price;
+        }
+
+        public Long getNumber() {
+                return number;
+        }
+
+        public void setNumber(Long number) {
+                this.number = number;
+        }
+
+        public double getCommision() {
+                return commision;
+        }
+
+        public void setCommision(double commision) {
+                this.commision = commision;
+        }
+
+        public String getDescription() {
+                return description;
+        }
+
+        public void setDescription(String description) {
+                this.description = description;
+        }
+
+        public double getValue() {
+                return value;
+        }
+
+        public void setValue(double value) {
+                this.value = value;
+        }
+
+        public TransEquType getTransType() {
+                return transType;
+        }
+
+        public void setTransType(TransEquType transType) {
+                this.transType = transType;
         }
 }

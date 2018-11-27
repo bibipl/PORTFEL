@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name ="TRADES_CASH")
+@Table(name ="OPERATIONS_ACCOUNT")
 public class OperationAccount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +22,6 @@ public class OperationAccount {
     TradeEqu.TransEquType transType;
 
     public enum TransEquType {
-        WPŁATA, WYPŁATA
+        WPŁATA, WYPŁATA, SALDO
     }
 }

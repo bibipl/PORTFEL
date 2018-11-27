@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "QUOTFUT")
+@Table(name = "QUOTS_FUT")
 public class QuotesFut {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)

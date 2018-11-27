@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class start {
 
     @RequestMapping("/")
-    @ResponseBody
     public String start() {
-        return "OK!";
+        return "Start";
     }
 }

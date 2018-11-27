@@ -16,3 +16,6 @@ Notowania Equities <-> wiele notowań (daty) do jednej akcji
 
 
 Transakcja : Identyfikuje instrument, rodzaj (np. Kupno/Sprzedaż), datę transakcji oraz datę rozliczenia, prowizję, opis. Osobne bazy danych transakcji dla każdego rodzaju instrumentów ze względu na wygodę odczytu danych- chodzi głównie o unikalny numer identyfikacyjny tak, żeby nie trzeba było sprawdzać dodatkowo, oprócz numeru, także typu instrumentu.
+
+Account - rodzaje transakcji : Wpłata, Wypłata, Saldo (zapisanie salda).
+Account : id, Name, value(to be calculated), date (to be calculated - last transacion date), description - krótki opcjonalny opis

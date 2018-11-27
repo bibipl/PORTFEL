@@ -1,16 +1,22 @@
 package pl.coderslab.account;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "CASH")
+@Table(name = "ACCOUNTS")
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String Name;
+    private Long id;        // id to database
+    private String Name;    // name of the account
+    @Transient
+    private double value;   // value of the account not ot store in db
+    @Transient
+    private LocalDate date; // date of last transaction
+    private String description; // small optional info
 
-    public Account() {
+    public Account() {      // we need only empty - all values by set/get
     }
 
     public Account(String name) {
@@ -31,5 +37,29 @@ public class Account {
 
     public void setName(String name) {
         Name = name;
+    }
+
+    public double getValue() {
+        return value;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
