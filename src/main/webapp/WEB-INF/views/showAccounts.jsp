@@ -20,7 +20,7 @@
                     <th>Data ostatniej operacji</th>
                     <th>Stan konta</th>
                     <th>Opis</th>
-                    <th style="width:25%">Zmiany</th>
+                    <th style="width:30%">Zmiany</th>
 
                 </tr>
                 </thead>
@@ -31,13 +31,17 @@
                         <td>${account.value}</td>
                         <td>${account.description}</td>
                         <td>
-                            <a href="/acc/refresh" class="btn btn-success">Akt</a>
-                            <a href="/acc/refresh" class="btn btn-success">Hist</a>
-                            <a href="/acc/update/${account.id}" class="btn btn-success">Edy</a>
-                            <a href="/acc/delete/${account.id}" class="btn btn-danger">Usuń</a>
+                            <a href="/acc/refresh" class="btn btn-success">AKT</a>
+                            <a href="/acc/refresh" class="btn btn-success">HIS</a>
+                            <a href="/acc/edit/${account.id}" class="btn btn-success">EDY</a>
+                            <a href="/acc/delete/${account.id}" class="btn btn-danger">USUŃ</a>
                         </td>
                     </tr>
                 </c:forEach>
+                <tr>
+                    <td></td><td></td><td></td><td></td>
+                    <td><a href="/acc/add" class="btn btn-warning" style="width: 87%">NOWE KONTO</a></td>
+                </tr>
             </table>
         </div>
     </div>

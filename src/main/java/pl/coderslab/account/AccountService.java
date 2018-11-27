@@ -6,7 +6,7 @@ public interface AccountService {
 
     public void save (Account account);
     public void update (Account account);
-    public void delete (Account account);
+    public void deleteById (Long id);
     public Account find (Long id);
     public List<Account> findAll();
 }

@@ -26,7 +26,7 @@ public class TradeEqu {
 
         @Enumerated(EnumType.STRING)
         @Column(length = 10)
-        TransEquType transType;
+        TransEquType transEquType;
 
         public enum TransEquType {
             KUPNO, SPRZEDAŻ, DYWIDENDA
@@ -100,12 +100,12 @@ public class TradeEqu {
                 this.value = value;
         }
 
-        public TransEquType getTransType() {
-                return transType;
+        public TransEquType getTransEquType() {
+        return transEquType;
         }
 
-        public void setTransType(TransEquType transType) {
-                this.transType = transType;
+        public void setTransEquType(TransEquType transEquType) {
+        this.transEquType = transEquType;
         }
 
         public Equity getEquity() {

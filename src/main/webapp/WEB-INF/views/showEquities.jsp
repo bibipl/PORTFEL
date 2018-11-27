@@ -22,7 +22,7 @@
                     <th>Liczba</th>
                     <th>Wartość</th>
                     <th>Opis</th>
-                    <th style="width:20%">Zmiany</th>
+                    <th style="width:22%">Zmiany</th>
 
                 </tr>
                 <c:forEach var="equity" items="${equities}">
@@ -35,12 +35,16 @@
                         <td>${equity.value}</td>
                         <td>${equity.description}</td>
                         <td>
-                            <a href="/acc/refresh" class="btn btn-success">Akt</a>
-                            <a href="/acc/update/${account.id}" class="btn btn-success">Edy</a>
-                            <a href="/acc/delete/${account.id}" class="btn btn-danger">Usuń</a>
+                            <a href="/acc/refresh" class="btn btn-success">AKT</a>
+                            <a href="/acc/update/${account.id}" class="btn btn-success">EDY</a>
+                            <a href="/acc/delete/${account.id}" class="btn btn-danger">USUŃ</a>
                         </td>
                     </tr>
                 </c:forEach>
+                <tr>
+                    <td></td><td></td><td></td><td></td></td><td></td></td></td><td></td><td></td>
+                    <td><a href="/acc/add" class="btn btn-warning" style="width: 96%">NOWA SPÓŁKA</a></td>
+                </tr>
             </table>
         </div>
     </div>

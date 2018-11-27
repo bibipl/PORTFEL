@@ -25,14 +25,14 @@ public class AccountServiceImpl implements AccountService{
     }
 
     @Override
-    public void delete(Account account) {
-        accountRepository.delete(account);
-
+    public void deleteById(Long id) {
+        accountRepository.deleteById(id);
     }
 
     @Override
     public Account find(Long id) {
-        return accountRepository.getOne(id);
+//        return accountRepository.getOne(id);
+        return accountRepository.findById(id).orElse(null);
     }
 
     @Override

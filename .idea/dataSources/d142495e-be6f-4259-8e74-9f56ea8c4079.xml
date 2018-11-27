@@ -1083,9 +1083,9 @@
       <DataType>date|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="272" parent="243" name="transType">
+    <column id="272" parent="243" name="operAccType">
       <Position>6</Position>
-      <DataType>varchar(8)|0s</DataType>
+      <DataType>varchar(10)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="273" parent="243" name="value">
@@ -1094,210 +1094,230 @@
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="274" parent="243" name="PRIMARY">
+    <column id="274" parent="243" name="account_id">
+      <Position>8</Position>
+      <DataType>bigint(20)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="275" parent="243" name="transAccType">
+      <Position>9</Position>
+      <DataType>varchar(10)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="276" parent="243" name="FKvqwjdhlmthtfc7mnr084vdep">
+      <ColNames>account_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="277" parent="243" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="275" parent="244" name="id">
+    <foreign-key id="278" parent="243" name="FKvqwjdhlmthtfc7mnr084vdep">
+      <ColNames>account_id</ColNames>
+      <RefSchemaName>PORTFEL</RefSchemaName>
+      <RefTableName>ACCOUNTS</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="279" parent="244" name="id">
       <Position>1</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="276" parent="244" name="date">
+    <column id="280" parent="244" name="date">
       <Position>2</Position>
       <DataType>date|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="277" parent="244" name="price">
+    <column id="281" parent="244" name="price">
       <Position>3</Position>
       <DataType>double|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="278" parent="244" name="equity_id">
+    <column id="282" parent="244" name="equity_id">
       <Position>4</Position>
       <DataType>bigint(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="279" parent="244" name="FKid3x88dc490jocvv9dk19u9mt">
+    <index id="283" parent="244" name="FKid3x88dc490jocvv9dk19u9mt">
       <ColNames>equity_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="280" parent="244" name="PRIMARY">
+    <key id="284" parent="244" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="281" parent="244" name="FKid3x88dc490jocvv9dk19u9mt">
+    <foreign-key id="285" parent="244" name="FKid3x88dc490jocvv9dk19u9mt">
       <ColNames>equity_id</ColNames>
       <RefSchemaName>PORTFEL</RefSchemaName>
       <RefTableName>EQUITIES</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="282" parent="245" name="id">
+    <column id="286" parent="245" name="id">
       <Position>1</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="283" parent="245" name="date">
+    <column id="287" parent="245" name="date">
       <Position>2</Position>
       <DataType>date|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="284" parent="245" name="price">
+    <column id="288" parent="245" name="price">
       <Position>3</Position>
       <DataType>double|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="285" parent="245" name="future_id">
+    <column id="289" parent="245" name="future_id">
       <Position>4</Position>
       <DataType>bigint(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="286" parent="245" name="FK7eab98edco1uwausmarwq8fsh">
+    <index id="290" parent="245" name="FK7eab98edco1uwausmarwq8fsh">
       <ColNames>future_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="287" parent="245" name="PRIMARY">
+    <key id="291" parent="245" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="288" parent="245" name="FK7eab98edco1uwausmarwq8fsh">
+    <foreign-key id="292" parent="245" name="FK7eab98edco1uwausmarwq8fsh">
       <ColNames>future_id</ColNames>
       <RefSchemaName>PORTFEL</RefSchemaName>
       <RefTableName>FUTURES</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="289" parent="246" name="id">
+    <column id="293" parent="246" name="id">
       <Position>1</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="290" parent="246" name="commision">
+    <column id="294" parent="246" name="commision">
       <Position>2</Position>
       <DataType>double|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="291" parent="246" name="description">
+    <column id="295" parent="246" name="description">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="292" parent="246" name="number">
+    <column id="296" parent="246" name="number">
       <Position>4</Position>
       <DataType>bigint(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="293" parent="246" name="price">
+    <column id="297" parent="246" name="price">
       <Position>5</Position>
       <DataType>double|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="294" parent="246" name="settlementDate">
+    <column id="298" parent="246" name="settlementDate">
       <Position>6</Position>
       <DataType>date|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="295" parent="246" name="tradeDate">
+    <column id="299" parent="246" name="tradeDate">
       <Position>7</Position>
       <DataType>date|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="296" parent="246" name="transType">
+    <column id="300" parent="246" name="equity_id">
       <Position>8</Position>
-      <DataType>varchar(10)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="297" parent="246" name="equity_id">
-      <Position>9</Position>
       <DataType>bigint(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="298" parent="246" name="FK1ssiiqq9y7xxi3loxfybb9jgw">
+    <column id="301" parent="246" name="transEquType">
+      <Position>9</Position>
+      <DataType>varchar(10)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="302" parent="246" name="FK1ssiiqq9y7xxi3loxfybb9jgw">
       <ColNames>equity_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="299" parent="246" name="PRIMARY">
+    <key id="303" parent="246" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="300" parent="246" name="FK1ssiiqq9y7xxi3loxfybb9jgw">
+    <foreign-key id="304" parent="246" name="FK1ssiiqq9y7xxi3loxfybb9jgw">
       <ColNames>equity_id</ColNames>
       <RefSchemaName>PORTFEL</RefSchemaName>
       <RefTableName>EQUITIES</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="301" parent="247" name="id">
+    <column id="305" parent="247" name="id">
       <Position>1</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="302" parent="247" name="commision">
+    <column id="306" parent="247" name="commision">
       <Position>2</Position>
       <DataType>double|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="303" parent="247" name="description">
+    <column id="307" parent="247" name="description">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="304" parent="247" name="number">
+    <column id="308" parent="247" name="number">
       <Position>4</Position>
       <DataType>bigint(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="305" parent="247" name="price">
+    <column id="309" parent="247" name="price">
       <Position>5</Position>
       <DataType>double|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="306" parent="247" name="settlementDate">
+    <column id="310" parent="247" name="settlementDate">
       <Position>6</Position>
       <DataType>date|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="307" parent="247" name="tradeDate">
+    <column id="311" parent="247" name="tradeDate">
       <Position>7</Position>
       <DataType>date|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="308" parent="247" name="transFutType">
+    <column id="312" parent="247" name="transFutType">
       <Position>8</Position>
       <DataType>varchar(10)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="309" parent="247" name="future_id">
+    <column id="313" parent="247" name="future_id">
       <Position>9</Position>
       <DataType>bigint(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="310" parent="247" name="FKly3rq3xbbgsnm3hxo1eyg54ns">
+    <index id="314" parent="247" name="FKly3rq3xbbgsnm3hxo1eyg54ns">
       <ColNames>future_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="311" parent="247" name="PRIMARY">
+    <key id="315" parent="247" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="312" parent="247" name="FKly3rq3xbbgsnm3hxo1eyg54ns">
+    <foreign-key id="316" parent="247" name="FKly3rq3xbbgsnm3hxo1eyg54ns">
       <ColNames>future_id</ColNames>
       <RefSchemaName>PORTFEL</RefSchemaName>
       <RefTableName>FUTURES</RefTableName>
