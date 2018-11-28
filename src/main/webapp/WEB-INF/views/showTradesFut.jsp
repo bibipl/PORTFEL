@@ -24,7 +24,7 @@
                     <th>TRANSAKCJA</th>
                     <th>ROZLICZENIE</th>
                     <th>KOMENTARZ</th>
-                    <th style="width:20%">Zmiany</th>
+                    <th style="width:15%">Zmiany</th>
 
                 </tr>
                 <c:forEach var="fuTrade" items="${fuTrades}">
@@ -40,12 +40,23 @@
                         <td>${fuTrade.settlementDate}</td>
                         <td>${fuTrade.description}</td>
                         <td>
-                            <a href="/acc/refresh" class="btn btn-success">Akt</a>
-                            <a href="/acc/update/${account.id}" class="btn btn-success">Edy</a>
-                            <a href="/acc/delete/${account.id}" class="btn btn-danger">Usuń</a>
+                            <a href="/trafu/refresh" class="btn btn-success">AKT</a>
+                            <a href="/trafu/edit/${fuTrade.id}" class="btn btn-success">EDY</a>
+                            <a href="/trafu/delete/${fuTrade.id}" class="btn btn-danger">USUŃ</a>
                         </td>
                     </tr>
                 </c:forEach>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><a href="/trafu/add" class="btn btn-warning" style="width: 95%"><STRONG>+</STRONG></a></td>
             </table>
         </div>
     </div>

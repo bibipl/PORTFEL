@@ -30,11 +30,10 @@ public class AccountController {
         return "addAccount";
     }
     @PostMapping("/add")
-    public String add(@RequestParam ("button") String button, @ModelAttribute @Valid Account account, BindingResult result) {
+    public String add(@ModelAttribute @Valid Account account, BindingResult result) {
         if (result.hasErrors()) {
             return "addAccount";
         }
-
         accountService.save(account);
         return "redirect:list";
     }

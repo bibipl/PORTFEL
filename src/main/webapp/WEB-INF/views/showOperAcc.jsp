@@ -9,7 +9,7 @@
 
 <body>
 <div class=leftright>
-    <h3 class="header">TRANSAKCJE NA KONTRAKTACH</h3>
+    <h3 class="header">OPERACJE NA KONTACH</h3>
     <div class="card">
         <div class="card-body">
             <table class="table table-striped">
@@ -22,7 +22,7 @@
                     <th>DATA</th>
                     <th>ROZLICZENIE</th>
                     <th>KOMENTARZ</th>
-                    <th style="width:20%">Zmiany</th>
+                    <th style="width:15%">Zmiany</th>
                 </tr>
                 <c:forEach var="operAcc" items="${operAccs}">
                     <tr>
@@ -35,12 +35,21 @@
                         <td>${operAcc.settlementDate}</td>
                         <td>${operAcc.description}</td>
                         <td>
-                            <a href="/acc/refresh" class="btn btn-success">Akt</a>
-                            <a href="/acc/update/${account.id}" class="btn btn-success">Edy</a>
-                            <a href="/acc/delete/${account.id}" class="btn btn-danger">Usuń</a>
+                            <a href="/opacc/refresh" class="btn btn-success">AKT</a>
+                            <a href="/opacc/edit/${operAcc.id}" class="btn btn-success">EDY</a>
+                            <a href="/opacc/delete/${operAcc.id}" class="btn btn-danger">USUŃ</a>
                         </td>
                     </tr>
                 </c:forEach>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><a href="/opacc/add" class="btn btn-warning" style="width: 95%"><STRONG>+</STRONG></a></td>
             </table>
         </div>
     </div>

@@ -8,10 +8,10 @@ import java.util.List;
 
 @Service
 @Transactional
-public class FuturesServiceImpl implements FuturesService{
+public class FutureServiceImpl implements FutureService {
 
     @Autowired
-    FuturesRepository futuresRepository;
+    FutureRepository futuresRepository;
 
 
     @Override
@@ -25,13 +25,13 @@ public class FuturesServiceImpl implements FuturesService{
     }
 
     @Override
-    public void delete(Future future) {
-        futuresRepository.delete(future);
+    public void deleteById(Long id) {
+        futuresRepository.deleteById(id);
     }
 
     @Override
     public Future find(Long id) {
-        return futuresRepository.getOne(id);
+        return futuresRepository.findById(id).orElse(null);
     }
 
     @Override

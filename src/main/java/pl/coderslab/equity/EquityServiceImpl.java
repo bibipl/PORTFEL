@@ -15,22 +15,23 @@ public class EquityServiceImpl implements EquityService{
 
     @Override
     public void save(Equity equity) {
+        equityRepository.save(equity);
 
     }
 
     @Override
     public void update(Equity equity) {
-
+        equityRepository.save(equity);
     }
 
     @Override
-    public void delete(Equity equity) {
-
+    public void deleteById(Long id) {
+        equityRepository.deleteById(id);
     }
 
     @Override
     public Equity find(Long id) {
-        return equityRepository.getOne(id);
+        return equityRepository.findById(id).orElse(null);
     }
 
     @Override

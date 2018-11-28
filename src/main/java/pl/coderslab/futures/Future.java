@@ -1,5 +1,6 @@
 package pl.coderslab.futures;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import pl.coderslab.account.Account;
 
 import javax.persistence.*;
@@ -13,7 +14,8 @@ public class Future {
     private Long id;
     private String name;
     private String isin;
-    private double mutliplier;
+    private double multiplier;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate expirationDate;
     private String description;
     @OneToOne
@@ -55,12 +57,12 @@ public class Future {
         this.isin = isin;
     }
 
-    public double getMutliplier() {
-        return mutliplier;
+    public double getMultiplier() {
+        return multiplier;
     }
 
-    public void setMutliplier(double mutliplier) {
-        this.mutliplier = mutliplier;
+    public void setMultiplier(double multiplier) {
+        this.multiplier = multiplier;
     }
 
     public LocalDate getExpirationDate() {

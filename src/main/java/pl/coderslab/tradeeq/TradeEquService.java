@@ -5,8 +5,8 @@ import java.util.List;
 public interface TradeEquService {
     public void save (TradeEqu tradeEqu);
     public void update (TradeEqu tradeEqu);
-    public void delete (TradeEqu tradeEqu);
-    public TradeEqu find (Long id);
+    public void deleteById (Long id);
+    public TradeEqu findById (Long id);
     public List<TradeEqu> findAll();
 }
 

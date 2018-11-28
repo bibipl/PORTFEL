@@ -20,7 +20,7 @@
                     <th>NOTOWANE DO</th>
                     <th>DATA WYCENY</th>
                     <th>CENA</th>
-                    <th style="width:20%">Zmiany</th>
+                    <th style="width:22%">Zmiany</th>
 
                 </tr>
                 <c:forEach var="quFut" items="${quFuts}">
@@ -31,12 +31,18 @@
                         <td>${quFut.date}</td>
                         <td>${quFut.price}</td>
                         <td>
-                            <a href="/acc/refresh" class="btn btn-success">Akt</a>
-                            <a href="/acc/update/${account.id}" class="btn btn-success">Edy</a>
-                            <a href="/acc/delete/${account.id}" class="btn btn-danger">Usuń</a>
+                            <a href="/fuQ/refresh" class="btn btn-success">AKT</a>
+                            <a href="/fuQ/edit/${quFut.id}" class="btn btn-success">EDY</a>
+                            <a href="/fuQ/delete/${quFut.id}" class="btn btn-danger">USUŃ</a>
                         </td>
                     </tr>
                 </c:forEach>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><a href="/fuQ/add" class="btn btn-warning" style="width: 96%"><STRONG>+</STRONG></a></td>
             </table>
         </div>
     </div>

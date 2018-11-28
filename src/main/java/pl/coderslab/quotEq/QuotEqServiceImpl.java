@@ -15,22 +15,22 @@ public class QuotEqServiceImpl implements QuotEqService {
 
     @Override
     public void save(QuotesEqu quotesEqu) {
-
+        quotEqRepository.save(quotesEqu);
     }
 
     @Override
     public void update(QuotesEqu quotesEqu) {
-
+        quotEqRepository.save(quotesEqu);
     }
 
     @Override
-    public void delete(QuotesEqu quotesEqu) {
-
+    public void deleteById(Long id) {
+        quotEqRepository.deleteById(id);
     }
 
     @Override
-    public QuotesEqu find(Long id) {
-        return quotEqRepository.getOne(id);
+    public QuotesEqu findById(Long id) {
+        return quotEqRepository.findById(id).orElse(null);
     }
 
     @Override

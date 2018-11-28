@@ -15,22 +15,23 @@ public class TradeFutServiceImpl implements TradeFutService {
 
     @Override
     public void save(TradeFut tradeFut) {
+        tradeFutRepository.save(tradeFut);
 
     }
 
     @Override
     public void update(TradeFut tradeFut) {
-
+        tradeFutRepository.save(tradeFut);
     }
 
     @Override
-    public void delete(TradeFut tradeFut) {
-
+    public void deleteById(Long id) {
+        tradeFutRepository.deleteById(id);
     }
 
     @Override
-    public TradeFut find(Long id) {
-        return tradeFutRepository.getOne(id);
+    public TradeFut findById(Long id) {
+        return tradeFutRepository.findById(id).orElse(null);
     }
 
     @Override

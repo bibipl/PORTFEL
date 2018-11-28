@@ -1,5 +1,6 @@
 package pl.coderslab.quotEq;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import pl.coderslab.equity.Equity;
 
 import javax.persistence.*;
@@ -12,7 +13,9 @@ public class QuotesEqu {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private double price;
 
     @ManyToOne

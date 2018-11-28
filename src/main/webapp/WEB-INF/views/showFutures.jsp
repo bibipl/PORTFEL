@@ -24,7 +24,7 @@
                     <th>Data wygaśnięcia</th>
                     <th>Konto powiązane</th>
                     <th style="width:30%">Opis</th>
-                    <th style="width:15%">Zmiany</th>
+                    <th style="width: 15%">Zmiany</th>
 
                 </tr>
                 <c:forEach var="future" items="${futures}">
@@ -39,12 +39,24 @@
                         <td>${future.account.name}</td>
                         <td>${future.description}</td>
                         <td>
-                            <a href="/acc/refresh" class="btn btn-success">Akt</a>
-                            <a href="/acc/update/${account.id}" class="btn btn-success">Edy</a>
-                            <a href="/acc/delete/${account.id}" class="btn btn-danger">Usuń</a>
+                            <a href="/fut/refresh" class="btn btn-success">AKT</a>
+                            <a href="/fut/edit/${future.id}" class="btn btn-success">EDY</a>
+                            <a href="/fut/delete/${future.id}" class="btn btn-danger">USUŃ</a>
                         </td>
                     </tr>
                 </c:forEach>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><a href="/fut/add" class="btn btn-warning" style="width: 95%">NOWY KONTRAKT</a></td>
+                </tr>
             </table>
         </div>
     </div>

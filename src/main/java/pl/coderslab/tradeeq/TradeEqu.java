@@ -1,22 +1,33 @@
 package pl.coderslab.tradeeq;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
 import pl.coderslab.equity.Equity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 @Entity
 @Table(name = "TRADES_EQUITIES")
 public class TradeEqu {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
-        LocalDate tradeDate;
+
+        @DateTimeFormat(pattern = "yyyy-MM-dd")
+        private LocalDate tradeDate;
+        @DateTimeFormat(pattern = "yyyy-MM-dd")
         LocalDate settlementDate;
         private double price;
         private Long number;
         private double commision;
         private String description;
+
+        @Transient
+        List<String> operEqTypes = new ArrayList<>(Arrays.asList("KUPNO", "SPRZEDAŻ", "DYWIDENDA"));
 
         @ManyToOne
         private Equity equity;
@@ -24,13 +35,14 @@ public class TradeEqu {
         @Transient
         double value;
 
-        @Enumerated(EnumType.STRING)
+//      @Enumerated(EnumType.STRING)
         @Column(length = 10)
-        TransEquType transEquType;
+        String transEquType;
 
-        public enum TransEquType {
+
+       /* public enum TransEquType {
             KUPNO, SPRZEDAŻ, DYWIDENDA
-        }
+        }*/
 
 
         public TradeEqu() {
@@ -100,11 +112,11 @@ public class TradeEqu {
                 this.value = value;
         }
 
-        public TransEquType getTransEquType() {
+        public String getTransEquType() {
         return transEquType;
         }
 
-        public void setTransEquType(TransEquType transEquType) {
+        public void setTransEquType(String transEquType) {
         this.transEquType = transEquType;
         }
 
@@ -115,4 +127,5 @@ public class TradeEqu {
         public void setEquity(Equity equity) {
                 this.equity = equity;
         }
+
 }

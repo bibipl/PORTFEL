@@ -1,10 +1,13 @@
 package pl.coderslab.tradeFu;
 
-import pl.coderslab.equity.Equity;
+import org.springframework.format.annotation.DateTimeFormat;
 import pl.coderslab.futures.Future;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Entity
 @Table(name = "TRADES_FUTURES")
@@ -12,16 +15,22 @@ public class TradeFut {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate tradeDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate settlementDate;
     private double price;
     private double number;
     private double commision;
     private String description;
 
-    @Enumerated(EnumType.STRING)
+
+    @Transient
+    List<String> operFuTypes = new ArrayList<>(Arrays.asList("KUPNO", "SPRZEDAŻ"));
+
+//    @Enumerated(EnumType.STRING)
     @Column(length = 10)
-    TransFutType transFutType;
+    String transFutType;
 
     @ManyToOne
     private Future future;
@@ -29,9 +38,9 @@ public class TradeFut {
     @Transient
     double exposure;
 
-    public enum TransFutType {
+   /* public enum TransFutType {
         KUPNO, SPRZEDAŻ
-    }
+    }*/
 
     public Long getId() {
         return id;
@@ -89,11 +98,11 @@ public class TradeFut {
         this.description = description;
     }
 
-    public TransFutType getTransFutType() {
+    public String getTransFutType() {
         return transFutType;
     }
 
-    public void setTransFutType(TransFutType transFutType) {
+    public void setTransFutType(String transFutType) {
         this.transFutType = transFutType;
     }
 

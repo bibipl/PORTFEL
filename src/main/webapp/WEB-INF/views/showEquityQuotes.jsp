@@ -19,7 +19,7 @@
                     <th>ISIN</th>
                     <th>Data wyceny</th>
                     <th>Cena</th>
-                    <th style="width:20%">Zmiany</th>
+                    <th style="width:22%">Zmiany</th>
 
                 </tr>
                 <c:forEach var="quEq" items="${quEqs}">
@@ -29,12 +29,17 @@
                         <td>${quEq.date}</td>
                         <td>${quEq.price}</td>
                         <td>
-                            <a href="/acc/refresh" class="btn btn-success">Akt</a>
-                            <a href="/acc/update/${account.id}" class="btn btn-success">Edy</a>
-                            <a href="/acc/delete/${account.id}" class="btn btn-danger">Usuń</a>
+                            <a href="/eqQ/refresh/" class="btn btn-success">AKT</a>
+                            <a href="/eqQ/edit/${quEq.id}" class="btn btn-success">EDY</a>
+                            <a href="/eqQ/delete/${quEq.id}" class="btn btn-danger">USUŃ</a>
                         </td>
                     </tr>
                 </c:forEach>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><a href="/eqQ/add" class="btn btn-warning" style="width: 96%"><STRONG>+</STRONG></a></td>
             </table>
         </div>
     </div>

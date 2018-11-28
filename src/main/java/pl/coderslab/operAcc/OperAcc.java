@@ -1,10 +1,13 @@
 package pl.coderslab.operAcc;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import pl.coderslab.account.Account;
-import pl.coderslab.tradeeq.TradeEqu;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Entity
 @Table(name ="OPERATIONS_ACCOUNT")
@@ -12,7 +15,9 @@ public class OperAcc {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate tradeDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate settlementDate;
     private double value;
     private double commision;
@@ -21,13 +26,15 @@ public class OperAcc {
     @ManyToOne
     private Account account;
 
-    @Enumerated(EnumType.STRING)
+    /*@Enumerated(EnumType.STRING)*/
     @Column(length = 10)
-    OperAccType operAccType;
+    String operAccType;
 
-    public enum OperAccType {
+    @Transient
+    List<String> operTypes = new ArrayList<>(Arrays.asList("WPŁATA", "WYPŁATA", "KOREKTA", "ODSETKI", "SALDO"));
+    /*public enum OperAccType {
         WPŁATA, WYPŁATA, KOREKTA, ODSETKI, SALDO
-    }
+    }*/
 
     public Long getId() {
         return id;
@@ -85,11 +92,11 @@ public class OperAcc {
         this.account = account;
     }
 
-    public OperAccType getOperAccType() {
+    public String getOperAccType() {
         return operAccType;
     }
 
-    public void setOperAccType(OperAccType operAccType) {
+    public void setOperAccType(String operAccType) {
         this.operAccType = operAccType;
     }
 }

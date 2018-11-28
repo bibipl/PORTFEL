@@ -3,8 +3,6 @@ package pl.coderslab.tradeeq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.coderslab.tradeFu.TradeFutRepository;
-import pl.coderslab.tradeFu.TradeFutService;
 
 import java.util.List;
 
@@ -17,22 +15,22 @@ public class TradeEquServiceImpl implements TradeEquService {
 
     @Override
     public void save(TradeEqu tradeEqu) {
-
+        tradeEquRepository.save(tradeEqu);
     }
 
     @Override
     public void update(TradeEqu tradeEqu) {
-
+        tradeEquRepository.save(tradeEqu);
     }
 
     @Override
-    public void delete(TradeEqu tradeEqu) {
-
+    public void deleteById(Long id) {
+        tradeEquRepository.deleteById(id);
     }
 
     @Override
-    public TradeEqu find(Long id) {
-        return tradeEquRepository.getOne(id);
+    public TradeEqu findById(Long id) {
+        return tradeEquRepository.findById(id).orElse(null);
     }
 
     @Override

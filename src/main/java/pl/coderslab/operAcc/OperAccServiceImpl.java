@@ -16,22 +16,23 @@ public class OperAccServiceImpl implements OperAccService{
 
     @Override
     public void save(OperAcc operAcc) {
+        operAccRepository.save(operAcc);
 
     }
 
     @Override
     public void update(OperAcc operAcc) {
-
+        operAccRepository.save(operAcc);
     }
 
     @Override
-    public void delete(OperAcc operAcc) {
-
+    public void deleteById(Long id) {
+        operAccRepository.deleteById(id);
     }
 
     @Override
     public OperAcc find(Long id) {
-        return operAccRepository.getOne(id);
+        return operAccRepository.findById(id).orElse(null);
     }
 
     @Override

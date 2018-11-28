@@ -15,22 +15,22 @@ public class QuotFuServiceImpl implements QuotFuService{
 
     @Override
     public void save(QuotesFut quotesFut) {
-
+        quotFuRepository.save(quotesFut);
     }
 
     @Override
     public void update(QuotesFut quotesFut) {
-
+        quotFuRepository.save(quotesFut);
     }
 
     @Override
-    public void delete(QuotesFut quotesFut) {
-
+    public void deleteById(Long id) {
+        quotFuRepository.deleteById(id);
     }
 
     @Override
-    public QuotesFut find(Long id) {
-        return quotFuRepository.getOne(id);
+    public QuotesFut findById(Long id) {
+        return quotFuRepository.findById(id).orElse(null);
     }
 
     @Override
