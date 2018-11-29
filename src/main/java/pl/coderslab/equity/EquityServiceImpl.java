@@ -38,4 +38,11 @@ public class EquityServiceImpl implements EquityService{
     public List<Equity> findAll() {
         return equityRepository.findAll();
     }
+
+    @Override
+    public Equity getFirstByIsin(String isin) {
+        return equityRepository.getFirstByIsin(isin);
+    }
+
+
 }

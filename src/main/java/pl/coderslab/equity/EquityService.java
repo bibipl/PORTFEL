@@ -8,5 +8,5 @@ public interface EquityService {
     public void deleteById (Long id);
     public Equity find (Long id);
     public List<Equity> findAll();
-
+    Equity getFirstByIsin(String isin);
 }

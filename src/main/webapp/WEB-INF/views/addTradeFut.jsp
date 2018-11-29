@@ -12,7 +12,6 @@
 </head>
 <body>
 <form:form method="post" modelAttribute="tradeFut">
-
     <div class="container">
 
         <h3 class="header">DODAJ NOWĄ TRANSAKCJĘ NA KONTRAKTACH TERMINOWYCH</h3>

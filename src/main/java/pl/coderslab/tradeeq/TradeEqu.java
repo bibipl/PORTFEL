@@ -22,7 +22,7 @@ public class TradeEqu {
         @DateTimeFormat(pattern = "yyyy-MM-dd")
         LocalDate settlementDate;
         private double price;
-        private Long number;
+        private long number;
         private double commision;
         private String description;
 

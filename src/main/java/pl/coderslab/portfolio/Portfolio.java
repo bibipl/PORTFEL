@@ -1,4 +1,4 @@
-package pl.coderslab.portfel;
+package pl.coderslab.portfolio;
 
 import pl.coderslab.account.Account;
 import pl.coderslab.equity.Equity;
@@ -7,7 +7,7 @@ import pl.coderslab.futures.Future;
 import java.time.LocalDate;
 import java.util.List;
 
-public class Portfel {
+public class Portfolio {
     private LocalDate valuationDate;
     private List<Equity> equities;
     private double eqNumber;
@@ -27,7 +27,7 @@ public class Portfel {
     private double totalPurchaseValue;
     private double totalValue;
 
-    public Portfel() {
+    public Portfolio() {
     }
 
     public LocalDate getValuationDate() {
