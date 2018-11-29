@@ -39,14 +39,13 @@
                         <td>${future.account.name}</td>
                         <td>${future.description}</td>
                         <td>
-                            <a href="/fut/refresh" class="btn btn-success">AKT</a>
                             <a href="/fut/edit/${future.id}" class="btn btn-success">EDY</a>
                             <a href="/fut/delete/${future.id}" class="btn btn-danger">USUŃ</a>
                         </td>
                     </tr>
                 </c:forEach>
                 <tr>
-                    <td></td>
+                    <td><a href="/" class="btn btn-warning" style="width:100%">MENU</a></td>
                     <td></td>
                     <td></td>
                     <td></td>

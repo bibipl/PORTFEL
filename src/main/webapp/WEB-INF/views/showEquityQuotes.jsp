@@ -29,13 +29,12 @@
                         <td>${quEq.date}</td>
                         <td>${quEq.price}</td>
                         <td>
-                            <a href="/eqQ/refresh/" class="btn btn-success">AKT</a>
                             <a href="/eqQ/edit/${quEq.id}" class="btn btn-success">EDY</a>
                             <a href="/eqQ/delete/${quEq.id}" class="btn btn-danger">USUŃ</a>
                         </td>
                     </tr>
                 </c:forEach>
-                <td></td>
+                <td><a href="/" class="btn btn-warning" style="width:100%">MENU</a></td>
                 <td></td>
                 <td></td>
                 <td></td>

@@ -18,3 +18,10 @@ body {
     margin-right:auto;
     margin-left:auto
 }
+
+.sum {
+    font-size: 23px;
+    font-weight: bold;
+    background-color: dimgrey;
+    color: white;
+}

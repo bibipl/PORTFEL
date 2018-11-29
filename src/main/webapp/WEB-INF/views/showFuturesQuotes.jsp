@@ -31,13 +31,12 @@
                         <td>${quFut.date}</td>
                         <td>${quFut.price}</td>
                         <td>
-                            <a href="/fuQ/refresh" class="btn btn-success">AKT</a>
                             <a href="/fuQ/edit/${quFut.id}" class="btn btn-success">EDY</a>
                             <a href="/fuQ/delete/${quFut.id}" class="btn btn-danger">USUŃ</a>
                         </td>
                     </tr>
                 </c:forEach>
-                <td></td>
+                <td><a href="/" class="btn btn-warning" style="width:100%">MENU</a></td>
                 <td></td>
                 <td></td>
                 <td></td>

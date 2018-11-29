@@ -40,13 +40,12 @@
                         <td>${eqTrade.settlementDate}</td>
                         <td>${eqTrade.description}</td>
                         <td>
-                            <a href="/traeq/refresh/" class="btn btn-success">AKT</a>
                             <a href="/traeq/edit/${eqTrade.id}" class="btn btn-success">EDY</a>
                             <a href="/traeq/delete/${eqTrade.id}" class="btn btn-danger">USUŃ</a>
                         </td>
                     </tr>
                 </c:forEach>
-                <td></td>
+                <td><a href="/" class="btn btn-warning" style="width:100%">MENU</a></td>
                 <td></td>
                 <td></td>
                 <td></td>

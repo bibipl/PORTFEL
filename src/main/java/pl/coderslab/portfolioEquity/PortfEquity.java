@@ -1,6 +1,5 @@
-package pl.coderslab.PortfolioParts;
+package pl.coderslab.portfolioEquity;
 
-import org.springframework.expression.EvaluationContext;
 import pl.coderslab.equity.Equity;
 
 import java.time.LocalDate;

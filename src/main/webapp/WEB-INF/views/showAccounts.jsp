@@ -31,7 +31,6 @@
                         <td>${account.value}</td>
                         <td>${account.description}</td>
                         <td>
-                            <a href="/acc/refresh" class="btn btn-success">AKT</a>
                             <a href="/acc/refresh" class="btn btn-success">HIS</a>
                             <a href="/acc/edit/${account.id}" class="btn btn-success">EDY</a>
                             <a href="/acc/delete/${account.id}" class="btn btn-danger">USUŃ</a>
@@ -39,7 +38,10 @@
                     </tr>
                 </c:forEach>
                 <tr>
-                    <td></td><td></td><td></td><td></td>
+                    <td><a href="/" class="btn btn-warning" style="width:100%">MENU</a></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     <td><a href="/acc/add" class="btn btn-warning" style="width: 87%">NOWE KONTO</a></td>
                 </tr>
             </table>

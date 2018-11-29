@@ -8,7 +8,7 @@
 </head>
 
 <body>
-<div class=leftright>
+<div class=container-fluid>
     <h3 class="header">TRANSAKCJE NA KONTRAKTACH</h3>
     <div class="card">
         <div class="card-body">
@@ -40,13 +40,12 @@
                         <td>${fuTrade.settlementDate}</td>
                         <td>${fuTrade.description}</td>
                         <td>
-                            <a href="/trafu/refresh" class="btn btn-success">AKT</a>
                             <a href="/trafu/edit/${fuTrade.id}" class="btn btn-success">EDY</a>
                             <a href="/trafu/delete/${fuTrade.id}" class="btn btn-danger">USUŃ</a>
                         </td>
                     </tr>
                 </c:forEach>
-                <td></td>
+                <td><a href="/" class="btn btn-warning" style="width:100%">MENU</a></td>
                 <td></td>
                 <td></td>
                 <td></td>

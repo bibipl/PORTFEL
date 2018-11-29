@@ -13,6 +13,8 @@ public class Account {
     @Transient
     private double value;   // value of the account not ot store in db
     @Transient
+    private double partOfTotalCash;
+    @Transient
     private LocalDate date; // date of last transaction
     private String description; // small optional info
 
@@ -61,5 +63,13 @@ public class Account {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public double getPartOfTotalCash() {
+        return partOfTotalCash;
+    }
+
+    public void setPartOfTotalCash(double partOfTotalCash) {
+        this.partOfTotalCash = partOfTotalCash;
     }
 }

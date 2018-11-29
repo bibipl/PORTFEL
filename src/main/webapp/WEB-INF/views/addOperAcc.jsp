@@ -64,7 +64,7 @@
                 <table style="width: 100%;">
                     <tr>
                         <td><input type="submit" class="btn btn-primary" style="width: 100%" value="ZATWIERDZAM"></td>
-                        <td><a href="/opacc/list/" class="btn btn-secondary" style="width: 100%">ANULUJĘ</a></td>
+                        <td><a href="/" class="btn btn-secondary" style="width: 100%">ANULUJĘ</a></td>
                     </tr>
                 </table>
             </div>

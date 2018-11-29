@@ -35,13 +35,12 @@
                         <td>${operAcc.settlementDate}</td>
                         <td>${operAcc.description}</td>
                         <td>
-                            <a href="/opacc/refresh" class="btn btn-success">AKT</a>
                             <a href="/opacc/edit/${operAcc.id}" class="btn btn-success">EDY</a>
                             <a href="/opacc/delete/${operAcc.id}" class="btn btn-danger">USUŃ</a>
                         </td>
                     </tr>
                 </c:forEach>
-                <td></td>
+                <td><a href="/" class="btn btn-warning" style="width:100%">MENU</a></td>
                 <td></td>
                 <td></td>
                 <td></td>

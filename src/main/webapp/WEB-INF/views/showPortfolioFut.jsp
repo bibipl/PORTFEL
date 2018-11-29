@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <html>
 <head>
     <title>PORTFELE</title>
@@ -10,7 +11,7 @@
 <body>
 <div class="container-fluid">
     <h3 class="header">PORTFEL</h3>
-    <h4 class="header">AKCJE</h4>
+    <h4 class="header">KONTRAKTY</h4>
     <div class="card">
         <div class="card-body">
             <table class="table table">
@@ -21,42 +22,42 @@
                         <th>LICZBA</th>
                         <th>CENA OTW.</th>
                         <th>CENA AKT</th>
-                        <th>ZMIANA %</th>
-                        <th>WARTOŚĆ OTW.</th>
-                        <th>WARTOŚĆ AKT</th>
+                        <th>ZMIANA PTS</th>
+                        <th>POCZ EKSPOZYCJA</th>
+                        <th>AKT EKPOZYCJA</th>
                         <th>ZYSK/STRATA %</th>
                         <th>Struktura %</th>
                         <th style="width:5%">OPCJE</th>
                     </tr>
                 </thead>
-                <c:forEach var="equityP" items="${eqPortf}">
+                <c:forEach var="futureP" items="${fuPortf}">
                     <tr>
-                        <td><strong>${equityP.name}</strong></td>
-                        <td>${equityP.isin}</td>
-                        <td>${equityP.number}</td>
-                        <td>${equityP.purchasePrice}</td>
-                        <td>${equityP.currentPrice}</td>
-                        <td>${equityP.changePrice} %</td>
-                        <td>${equityP.purchaseValuation}</td>
-                        <td>${equityP.currentValuation}</td>
-                        <td>${equityP.changeValuation} %</td>
-                        <td>${equityP.percenOfThePortfolio} %</td>
+                        <td><strong>${futureP.name}</strong></td>
+                        <td>${futureP.isin}</td>
+                        <td>${futureP.numberOfContracts}</td>
+                        <td>${futureP.purchasePrice}</td>
+                        <td>${futureP.price}</td>
+                        <td>${futureP.changepts}</td>
+                        <td>${futureP.purchaseExposure}</td>
+                        <td>${futureP.exposure}</td>
+                        <td>${futureP.changeValuation} PLN</td>
+                        <td>${futureP.percentOfTheExposure} %</td>
                         <td>
-                            <a href="/portf/hist/${equityP.id}" class="btn btn-success">HISTORIA</a>
+                            <a href="/portf/hist/${futureP.id}" class="btn btn-success">HISTORIA</a>
                         </td>
                     </tr>
                 </c:forEach>
                 <tr>
-                    <td class="sum"><strong>${sum.name}</strong></td>
+                    <td class="sum">${sum.name}</td>
                     <td class="sum">${sum.isin}</td>
-                    <td class="sum">${sum.number}</td>
+                    <td class="sum">${sum.numberOfContracts}</td>
                     <td class="sum">${sum.purchasePrice}</td>
-                    <td class="sum">${sum.currentPrice}</td>
-                    <td class="sum">${sum.changePrice} %</td>
-                    <td class="sum">${sum.purchaseValuation}</td>
-                    <td class="sum">${sum.currentValuation}</td>
-                    <td class="sum">${sum.changeValuation} %</td>
-                    <td class="sum">${sum.percenOfThePortfolio} %</td>
+                    <td class="sum">${sum.price}</td>
+                    <td class="sum">${sum.changepts}</td>
+                    <td class="sum">${sum.purchaseExposure}</td>
+                    <td class="sum">${sum.exposure}</td>
+                    <td class="sum">${sum.changeValuation} PLN</td>
+                    <td class="sum">${sum.percentOfTheExposure} %</td>
                     <td class="sum"></td>
                 </tr>
                 <td></td>
@@ -69,7 +70,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td><a href="/" class="btn btn-warning" style="width: 100%">MENU</a></td>
+                <td><a href="/" class="btn btn-warning" style="width: 100%"><STRONG>MENU</STRONG></a></td>
             </table>
         </div>
     </div>
