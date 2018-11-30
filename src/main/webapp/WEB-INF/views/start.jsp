@@ -10,8 +10,8 @@
         }
     </style>
 </head>
-<body>
-
+<body class="bcg">
+    <img src="">
     <h2 style="text-align: center">M E N U</h2>
     <h3 style="text-align: center">P O R T F E L   I N W E S T Y C Y J N Y</h3>
 

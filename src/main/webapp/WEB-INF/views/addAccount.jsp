@@ -3,7 +3,7 @@
 <%@ taglib prefix="forr" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
-    <title>NOWE KONTO</title>
+    <title>KONTA</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/main.css" rel="stylesheet">
     <link href="../../css/bootstrap.min.css" rel="stylesheet">

@@ -28,3 +28,6 @@ body {
 .menbut {
     width: 300px;
 }
+body {
+    background-image: url("/css/images/bcg.jpg");
+}

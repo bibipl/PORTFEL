@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>GOTÓWKA</title>
+    <title>AKCJE</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/main.css" rel="stylesheet">
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
