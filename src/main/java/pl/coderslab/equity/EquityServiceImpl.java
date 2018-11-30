@@ -40,8 +40,13 @@ public class EquityServiceImpl implements EquityService{
     }
 
     @Override
-    public Equity getFirstByIsin(String isin) {
-        return equityRepository.getFirstByIsin(isin);
+    public List<Equity> findByIsin(String isin) {
+        return equityRepository.findByIsin(isin);
+    }
+
+    @Override
+    public List<Equity> findByName(String name) {
+        return equityRepository.findByName(name);
     }
 
 

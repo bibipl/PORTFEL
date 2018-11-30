@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface EquityRepository extends JpaRepository<Equity,Long> {
 
-    @Query("select i.name from Equity i where i.isin = ?1")
-    Equity getFirstByIsin(String isin);
+    List<Equity> findByIsin(String isin);
+    List<Equity> findByName(String name);
 
 
 }

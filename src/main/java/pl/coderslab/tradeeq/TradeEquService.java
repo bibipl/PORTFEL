@@ -8,5 +8,7 @@ public interface TradeEquService {
     public void deleteById (Long id);
     public TradeEqu findById (Long id);
     public List<TradeEqu> findAll();
+    List<TradeEqu> findAllByEquityId (Long id);
+    List<TradeEqu> findTradeEquByTransEquType(Long id, String transEquType);
 }
 

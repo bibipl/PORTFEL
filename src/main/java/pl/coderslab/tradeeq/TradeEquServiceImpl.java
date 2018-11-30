@@ -37,4 +37,16 @@ public class TradeEquServiceImpl implements TradeEquService {
     public List<TradeEqu> findAll() {
         return tradeEquRepository.findAll();
     }
+
+    @Override
+    public List<TradeEqu> findAllByEquityId(Long id) {
+        return tradeEquRepository.findAllByEquityId(id);
+    }
+
+    @Override
+    public List<TradeEqu> findTradeEquByTransEquType(Long id, String transEquType) {
+        return tradeEquRepository.findTradeEquByTransEquType(id,transEquType);
+    }
+
+
 }

@@ -1,4 +1,4 @@
-package pl.coderslab;
+package pl.coderslab.Calculations;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

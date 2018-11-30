@@ -15,12 +15,12 @@
 
             <table class="table table-striped">
                 <tr>
-                    <th>Nazwa</th>
+                    <th>NAZWA</th>
                     <th>ISIN</th>
                     <th>NOTOWANE DO</th>
                     <th>DATA WYCENY</th>
                     <th>CENA</th>
-                    <th style="width:22%">Zmiany</th>
+                    <th style="width:22%">OPCJE</th>
 
                 </tr>
                 <c:forEach var="quFut" items="${quFuts}">

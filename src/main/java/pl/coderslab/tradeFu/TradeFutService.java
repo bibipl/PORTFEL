@@ -1,5 +1,6 @@
 package pl.coderslab.tradeFu;
 
+
 import java.util.List;
 
 public interface TradeFutService {
@@ -8,4 +9,5 @@ public interface TradeFutService {
     public void deleteById (Long id);
     public TradeFut findById (Long id);
     public List<TradeFut> findAll();
+    List<TradeFut> findAllByFutureId (Long id);
 }

@@ -38,4 +38,9 @@ public class TradeFutServiceImpl implements TradeFutService {
     public List<TradeFut> findAll() {
         return tradeFutRepository.findAll();
     }
+
+    @Override
+    public List<TradeFut> findAllByFutureId(Long id) {
+        return tradeFutRepository.findAllByFutureId(id);
+    }
 }

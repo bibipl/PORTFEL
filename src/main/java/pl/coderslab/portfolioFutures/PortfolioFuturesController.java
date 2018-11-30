@@ -5,7 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.coderslab.Calculator;
+import pl.coderslab.Calculations.Calculator;
+import pl.coderslab.futures.Future;
+import pl.coderslab.futures.FutureService;
 import pl.coderslab.quotFu.QuotFuService;
 import pl.coderslab.quotFu.QuotesFut;
 import pl.coderslab.tradeFu.TradeFut;
@@ -25,6 +27,9 @@ public class PortfolioFuturesController {
 
     @Autowired
     QuotFuService quotFuService;
+
+    @Autowired
+    FutureService futureService;
 
 
     @GetMapping("/calculate")
@@ -46,7 +51,12 @@ public class PortfolioFuturesController {
 
         while (itFu.hasNext()) {
             PortfFuture portfFuture = new PortfFuture();
-            portfFuture.setIsin(itFu.next());
+            String isin = itFu.next();
+            portfFuture.setIsin(isin);
+            List<Future> fu =futureService.findByIsin(isin);
+            Future fuOne = fu.get(0);
+            portfFuture.setId(fuOne.getId());
+            portfFuture.setName((fuOne.getName()));
             LocalDate date = null;
             double price = 0;
 
@@ -54,7 +64,7 @@ public class PortfolioFuturesController {
             if (futureQuotations.size() > 0) {
                 for (QuotesFut quotesFut : futureQuotations) {
                     if (quotesFut.getFuture().getIsin().equals(portfFuture.getIsin())) {
-                        portfFuture.setName(quotesFut.getFuture().getName());       // static Future data into portfFut
+                        /*portfFuture.setName(quotesFut.getFuture().getName());  */     // static Future data into portfFut
                         portfFuture.setMultiplier(quotesFut.getFuture().getMultiplier()); // static data
                         if (date == null) {
                             date = quotesFut.getDate();

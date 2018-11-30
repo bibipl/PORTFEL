@@ -9,7 +9,7 @@
 
 <body>
 <div class="container-fluid">
-    <h3 class="header">Konta</h3>
+    <h3 class="header">GOTÓWKA</h3>
     <div class="card">
         <div class="card-body">
             <table class="table table">
@@ -32,7 +32,7 @@
                         <td>${account.partOfTotalCash} %</td>
                         <td>${account.description}</td>
                         <td>
-                            <a href="/acc/refresh" class="btn btn-success">HISTORIA</a>
+                            <a href="/opacc/histid/${account.id}" class="btn btn-success">HISTORIA</a>
                         </td>
                     </tr>
                 </c:forEach>

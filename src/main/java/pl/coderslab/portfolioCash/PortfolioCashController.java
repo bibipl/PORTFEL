@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.coderslab.Calculator;
+import pl.coderslab.Calculations.Calculator;
 import pl.coderslab.account.Account;
 import pl.coderslab.account.AccountService;
 import pl.coderslab.operAcc.OperAcc;
@@ -82,6 +82,7 @@ public class PortfolioCashController {
         totalAcc.setName("SUMA");
         totalAcc.setDate(LocalDate.now());
         totalAcc.setValue(Calculator.round(totalCashValue,2));
+        totalAcc.setPartOfTotalCash(100);
 
         model.addAttribute("cashPortf", accountInPortf);
         model.addAttribute("suma", totalAcc);

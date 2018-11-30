@@ -10,6 +10,17 @@
 <body>
 <div class=leftright>
     <h3 class="header">OPERACJE NA KONTACH</h3>
+    <TABLE class="table table">
+        <td class="menbut"><a href="/" class="btn btn-warning" style="width:100%">MENU</a></td>
+        <td class="menbut"><a href="/cash/calculate" class="btn btn-warning" style="width: 95%">PORTFEL GOTÓWKOWY</a></td>
+        <td class="menbut"><a href="/fuPortf/calculate" class="btn btn-warning" style="width: 95%">PORTFEL KONTRAKTÓW</a></td>
+        <td class="menbut"><a href="/eqPortf/calculate" class="btn btn-warning" style="width: 95%">PORTFEL AKCJI</a></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td class="menbut"><a href="/opacc/add" class="btn btn-warning" style="width: 95%"><STRONG>+</STRONG></a></td>
+    </TABLE>
     <div class="card">
         <div class="card-body">
             <table class="table table-striped">
@@ -22,7 +33,7 @@
                     <th>DATA</th>
                     <th>ROZLICZENIE</th>
                     <th>KOMENTARZ</th>
-                    <th style="width:15%">Zmiany</th>
+                    <th style="width:15%">OPCJE</th>
                 </tr>
                 <c:forEach var="operAcc" items="${operAccs}">
                     <tr>
@@ -40,15 +51,7 @@
                         </td>
                     </tr>
                 </c:forEach>
-                <td><a href="/" class="btn btn-warning" style="width:100%">MENU</a></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><a href="/opacc/add" class="btn btn-warning" style="width: 95%"><STRONG>+</STRONG></a></td>
+
             </table>
         </div>
     </div>

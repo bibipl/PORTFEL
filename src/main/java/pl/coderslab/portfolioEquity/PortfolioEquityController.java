@@ -5,17 +5,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.coderslab.Calculator;
+import pl.coderslab.Calculations.Calculator;
+import pl.coderslab.equity.Equity;
 import pl.coderslab.equity.EquityService;
-import pl.coderslab.operAcc.OperAcc;
 import pl.coderslab.operAcc.OperAccService;
 import pl.coderslab.quotEq.QuotEqService;
 import pl.coderslab.quotEq.QuotesEqu;
 import pl.coderslab.quotFu.QuotFuService;
-import pl.coderslab.tradeFu.TradeFut;
 import pl.coderslab.tradeFu.TradeFutService;
 import pl.coderslab.tradeeq.TradeEqu;
 import pl.coderslab.tradeeq.TradeEquService;
+
 
 import java.time.LocalDate;
 import java.util.*;
@@ -44,116 +44,137 @@ public class PortfolioEquityController {
 
     @GetMapping("/calculate")
     public String porfolio(Model model) {
-        double totalEqCurrentValue = 0;   // we need it to calculate later structure of the equity portfolio (val/totalVal)
-        double totatEqPurchaseValue = 0;
 
+        double totalEqCurrentValue = 0;   // we need it to calculate later structure of the equity portfolio (val/totalVal)
+        double totalEqPurchaseValue = 0;
+
+        List<PortfEquity> eqInPortfolio = new ArrayList<>();
         List<TradeEqu> equityTrades = tradeEquService.findAll();
         List<QuotesEqu> equityQuotations = quotEqService.findAll();
 
-        List<TradeFut> futureTrades = tradeFutService.findAll();
-        List<OperAcc> accountOperations = operAccService.findAll();
-
-        List<PortfEquity> eqInPortfolio = new ArrayList<>();
-
-
         Set<String> equities = new TreeSet<String>();
         for (TradeEqu tradeEqu : equityTrades) {
-            equities.add(tradeEqu.getEquity().getIsin()); // we upload uniqe isins to search transactions
+            equities.add(tradeEqu.getEquity().getName()); // we upload names alphabetically
         }
         Iterator<String> itEq = equities.iterator();
 
         while (itEq.hasNext()) {
             PortfEquity portfEquity = new PortfEquity();
-            portfEquity.setIsin(itEq.next());
-//        Equity eq =equityService.getFirstByIsin("PLPKN0000018");
-//        portfEquity.setName(equity.getName());
-            LocalDate date = null;
-            double price = 0;
+            List<TradeEqu> equityBuy = null;
+            List<TradeEqu> equitySell = null;
+            List<TradeEqu> equityFifo = null;
+            String name = itEq.next();
+            double valueBuy =0;
+            double valueSell = 0;
+            long numberBuy=0;
+            long numberSell=0;
+            List<Equity> eq = equityService.findByName(name);
+            if (eq.size() > 0) {    // when there is at least one equity
 
-            //Now we are going to find the latest quotation for sppecifies equity
-            if (equityQuotations.size() > 0) {
-                for (QuotesEqu quotesEqu : equityQuotations) {
-                    if (quotesEqu.getEquity().getIsin().equals(portfEquity.getIsin())) {
-                        portfEquity.setName(quotesEqu.getEquity().getName());
-                        if (date == null) {
-                            date = quotesEqu.getDate();
-                            price = quotesEqu.getPrice();
+                Equity eqOne = eq.get(0);               // There shuould be exactly one equity
+                portfEquity.setId(eqOne.getId());       // We initiate portfolio position with static data
+                portfEquity.setName((eqOne.getName()));
+                portfEquity.setIsin(eqOne.getIsin());
+
+                LocalDate date = null;
+                double price = 0;
+
+                //### find the newest quotatioin date
+                //Now we are going to find the latest quotation for specifies equity
+                if (equityQuotations.size() > 0) {
+                    for (QuotesEqu quotesEqu : equityQuotations) {
+                        if (quotesEqu.getEquity().getName().equals(portfEquity.getName())) {
+                            if (date == null) {
+                                date = quotesEqu.getDate();
+                                price = quotesEqu.getPrice();
+                            }
+                            if (!date.isAfter(quotesEqu.getDate())) {
+                                // in case we have to replace todays trade price with todays quotation
+                                // dates may be equal but we prefer closing price
+                                date = quotesEqu.getDate();
+                                price = quotesEqu.getPrice();
+                            }
                         }
-                        if (!date.isAfter(quotesEqu.getDate())) {
-                            // in case we have to replace todays trade price with todays quotation
-                            // dates equal but we prefer closing price
-                            date = quotesEqu.getDate();
-                            price = quotesEqu.getPrice();
+                    }
+                    portfEquity.setCurrentValuationDate(date);
+                    portfEquity.setCurrentPrice(Calculator.round(price, 2));
+                }
+                // ### Static + price value/date ok.
+                // Here if price <>0 and date<>null we got last quotation and last date
+                // Now we look for number of shares and purchase price
+
+                equityBuy = tradeEquService.findTradeEquByTransEquType(eqOne.getId(), "KUPNO");
+                equitySell = tradeEquService.findTradeEquByTransEquType(eqOne.getId(), "SPRZEDAŻ");
+
+                //we count overall number equities sold
+                for (TradeEqu tradeS : equitySell) {
+                    numberSell += tradeS.getNumber();
+                }
+                // we count overall number bought and value bought subtr. FIFO sold ones
+                boolean adjusted = false;
+                for (TradeEqu tradeB : equityBuy) {
+                    if (!adjusted) {
+                        if (tradeB.getNumber() >= numberSell) {
+                            adjusted = true;
+                            double difference = tradeB.getNumber() - numberSell;
+                            numberBuy += difference;
+                            valueBuy += difference * tradeB.getPrice();
+                            if (numberSell > 0) valueBuy += difference / numberSell * tradeB.getCommision();
+                            else valueBuy += tradeB.getCommision();
+                        } else {
+                            numberSell -= tradeB.getNumber();
                         }
+                    } else {
+                        numberBuy += tradeB.getNumber();
+                        valueBuy += tradeB.getPrice() * tradeB.getNumber() + tradeB.getCommision();
                     }
                 }
-                portfEquity.setCurrentValuationDate(date);
-                portfEquity.setCurrentPrice(price);
-            }
-            // Here if price <>0 and date<>null we got last quotation and last date
-            // Now we look for number of shares and purchase price
-
-            if (equityTrades.size() > 0) {
-                double value = 0;
-                long number = 0;
-                for (TradeEqu tradeEqu : equityTrades) {
-                    // below : if to take only propoer equity (by isin we reconize)
-                    if (tradeEqu.getEquity().getIsin().equals(portfEquity.getIsin())) {
-                        if (tradeEqu.getTransEquType().equals("KUPNO")) {
-                            number += tradeEqu.getNumber();
-                            value += tradeEqu.getNumber() * tradeEqu.getPrice() + tradeEqu.getCommision();
-                        } else if (tradeEqu.getTransEquType().equals("SPRZEDAŻ")) {
-                            number -= tradeEqu.getNumber();
-                            value -= tradeEqu.getNumber() * tradeEqu.getPrice() - tradeEqu.getCommision();
-                        }
-                        // below price and date - we update to keep last's transaction curent data,
-                        // in case there is no quotation in the database yet
-                        if (portfEquity.getCurrentPrice() == 0) portfEquity.setCurrentPrice(tradeEqu.getPrice());
-                        if (portfEquity.getCurrentValuationDate() == null)
-                            portfEquity.setCurrentValuationDate(tradeEqu.getTradeDate());
-                        if (number == 0) value = 0; // position closed completely = we start to count from 0;
+                // here now we have calculated number of shares remaining in the portfolio and purchase value of the shares
+                portfEquity.setNumber(numberBuy);
+                //portfEquity.setValue(Calculator.round(valueBuy, 2));
+                if (numberBuy != 0) {
+                    double purchasePrice = Calculator.round(valueBuy / numberBuy, 2);
+                    portfEquity.setPurchasePrice(purchasePrice);
+                    portfEquity.setPurchaseValuation(Calculator.round(purchasePrice * numberBuy, 2));
+                    portfEquity.setCurrentValuation(Calculator.round(portfEquity.getCurrentPrice()*numberBuy,2));
+                    if (purchasePrice != 0) {
+                        portfEquity.setChangePrice(Calculator.round((portfEquity.getCurrentPrice()/portfEquity.getPurchasePrice()-1)*100,2));
                     }
-                } // for
-                portfEquity.setPurchaseValuation(Calculator.round(value,2));
-                portfEquity.setNumber(number);
-                if (number != 0) portfEquity.setPurchasePrice(Calculator.round(value / number,2));
-                else portfEquity.setPurchasePrice(0.00);
-            } // finished one equity search, before next loop lets calculate avg prices etc....
+                    portfEquity.setChangeValuation(Calculator.round(portfEquity.getCurrentValuation() - portfEquity.getPurchaseValuation(),2));
+                }
+                // Complete portfEquity position. The question : do we have <>0 number in portfolio ??
+                // if yes, lets update prices and valuations
+                if (numberBuy != 0) {
+                    eqInPortfolio.add(portfEquity);
+                    totalEqPurchaseValue += portfEquity.getPurchaseValuation();
+                    totalEqCurrentValue += portfEquity.getCurrentValuation();
 
-            if (portfEquity.getPurchasePrice() != 0) {
-                double tmpChange = (portfEquity.getCurrentPrice() / portfEquity.getPurchasePrice() - 1) * 100;
-                portfEquity.setChangePrice(Calculator.round(tmpChange,2));
+                }
             }
-            portfEquity.setCurrentValuation(portfEquity.getCurrentPrice() * portfEquity.getNumber());
-            if (portfEquity.getPurchaseValuation() != 0) {
-                double tmpChange = (portfEquity.getCurrentValuation() / portfEquity.getPurchaseValuation() - 1) * 100;
-                portfEquity.setChangeValuation(Calculator.round(tmpChange,2));
-            }
-            totalEqCurrentValue  += portfEquity.getCurrentValuation();
-            totatEqPurchaseValue += portfEquity.getPurchaseValuation();
-            eqInPortfolio.add(portfEquity);
         } // end of While iterator
 
         // Now we count the structure of the portfolio
         if (totalEqCurrentValue != 0) {
             for (PortfEquity portfEquity : eqInPortfolio) {
                 double tmpChange = (portfEquity.getCurrentValuation() / totalEqCurrentValue * 100);
-                portfEquity.setPercenOfThePortfolio(Calculator.round(tmpChange,2));
+                portfEquity.setPercenOfThePortfolio(Calculator.round(tmpChange, 2));
             }
         }
         PortfEquity totalEquity = new PortfEquity();
         totalEquity.setName("SUMA");
         totalEquity.setCurrentValuationDate(LocalDate.now());
-        totalEquity.setCurrentValuation(Calculator.round(totalEqCurrentValue,2));
-        totalEquity.setPurchaseValuation(Calculator.round(totatEqPurchaseValue,2));
-        if (totatEqPurchaseValue != 0 ) {
-            double tmpChange =(totalEqCurrentValue/totatEqPurchaseValue-1)*100;
-            totalEquity.setChangeValuation(Calculator.round(tmpChange,2));
+        totalEquity.setCurrentValuation(Calculator.round(totalEqCurrentValue, 2));
+        totalEquity.setPurchaseValuation(Calculator.round(totalEqPurchaseValue, 2));
+        if (totalEqPurchaseValue != 0) {
+            double tmpChange = (totalEqCurrentValue / totalEqPurchaseValue - 1) * 100;
+            totalEquity.setChangePrice(Calculator.round(tmpChange, 2));
         }
+        totalEquity.setChangeValuation(Calculator.round(totalEqCurrentValue-totalEqPurchaseValue,2));
         totalEquity.setPercenOfThePortfolio(100.00);
+
         model.addAttribute("eqPortf", eqInPortfolio);
         model.addAttribute("sum", totalEquity);
-        return "showPortfolio";
+        return "showPortfolioEqu";
     }
 
 }

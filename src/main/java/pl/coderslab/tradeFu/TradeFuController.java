@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.coderslab.account.Account;
 import pl.coderslab.futures.Future;
 import pl.coderslab.futures.FutureService;
+import pl.coderslab.tradeeq.TradeEqu;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
@@ -40,7 +41,7 @@ public class TradeFuController {
     public String add(Model model) {
         LocalDate today = LocalDate.now();
         LocalDate settlDay = today.plusDays(2);
-        if (today.getDayOfWeek().name()=="FRIDAY") settlDay = today.plusDays(4);
+        if (today.getDayOfWeek().name()=="FRIDAY" || today.getDayOfWeek().name()=="THURSDAY") settlDay = today.plusDays(4);
         TradeFut tradeFut = new TradeFut();
         tradeFut.setTradeDate(today);
         tradeFut.setSettlementDate(settlDay);
@@ -82,6 +83,12 @@ public class TradeFuController {
         }
         tradeFutService.update(tradeFut);
         return "redirect:../list";
+    }
+    @GetMapping("/histid/{id}")
+    public String tradeHistoryById (Model model, @PathVariable Long id) {
+        List<TradeFut> fuTrades = tradeFutService.findAllByFutureId(id);
+        model.addAttribute("fuTrades", fuTrades);
+        return"showTradesFut";
     }
 
 }

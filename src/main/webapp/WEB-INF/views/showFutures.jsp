@@ -15,16 +15,16 @@
 
             <table class="table table-hover">
                 <tr>
-                    <th>Nazwa</th>
+                    <th>NAZWA</th>
                     <th>ISIN</th>
-                    <th>Data wyceny</th>
-                    <th>Cena</th>
-                    <th>Liczba</th>
-                    <th>Ekspozycja</th>
-                    <th>Data wygaśnięcia</th>
-                    <th>Konto powiązane</th>
-                    <th style="width:30%">Opis</th>
-                    <th style="width: 15%">Zmiany</th>
+                    <th>DATA WYCENY</th>
+                    <th>CENA</th>
+                    <th>LICZBA</th>
+                    <th>EKSPOZYCJAa</th>
+                    <th>DATA WYGAŚNIĘCIA</th>
+                    <th>KONTO POWIĄZANE</th>
+                    <th style="width:30%">OPIS</th>
+                    <th style="width: 15%">OPCJE</th>
 
                 </tr>
                 <c:forEach var="future" items="${futures}">
@@ -54,7 +54,7 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><a href="/fut/add" class="btn btn-warning" style="width: 95%">NOWY KONTRAKT</a></td>
+                    <td><a href="/fut/add" class="btn btn-warning" style="width: 72%">+</a></td>
                 </tr>
             </table>
         </div>

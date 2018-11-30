@@ -38,4 +38,9 @@ public class FutureServiceImpl implements FutureService {
     public List<Future> findAll() {
         return futuresRepository.findAll();
     }
+
+    @Override
+    public List<Future> findByIsin(String isin) {
+        return futuresRepository.findByIsin(isin);
+    }
 }

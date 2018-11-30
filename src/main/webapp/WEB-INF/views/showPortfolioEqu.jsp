@@ -9,8 +9,7 @@
 
 <body>
 <div class="container-fluid">
-    <h3 class="header">PORTFEL</h3>
-    <h4 class="header">AKCJE</h4>
+    <h3 class="header">AKCJE</h3>
     <div class="card">
         <div class="card-body">
             <table class="table table">
@@ -24,7 +23,7 @@
                         <th>ZMIANA %</th>
                         <th>WARTOŚĆ OTW.</th>
                         <th>WARTOŚĆ AKT</th>
-                        <th>ZYSK/STRATA %</th>
+                        <th>ZYSK/STRATA PLN</th>
                         <th>Struktura %</th>
                         <th style="width:5%">OPCJE</th>
                     </tr>
@@ -39,24 +38,24 @@
                         <td>${equityP.changePrice} %</td>
                         <td>${equityP.purchaseValuation}</td>
                         <td>${equityP.currentValuation}</td>
-                        <td>${equityP.changeValuation} %</td>
+                        <td>${equityP.changeValuation}</td>
                         <td>${equityP.percenOfThePortfolio} %</td>
                         <td>
-                            <a href="/portf/hist/${equityP.id}" class="btn btn-success">HISTORIA</a>
+                            <a href="/traeq/histid/${equityP.id}" class="btn btn-success">HISTORIA</a>
                         </td>
                     </tr>
                 </c:forEach>
                 <tr>
                     <td class="sum"><strong>${sum.name}</strong></td>
-                    <td class="sum">${sum.isin}</td>
-                    <td class="sum">${sum.number}</td>
-                    <td class="sum">${sum.purchasePrice}</td>
-                    <td class="sum">${sum.currentPrice}</td>
-                    <td class="sum">${sum.changePrice} %</td>
+                    <td class="sum"></td>
+                    <td class="sum"></td>
+                    <td class="sum"></td>
+                    <td class="sum"></td>
+                    <td class="sum">${sum.changePrice}%</td>
                     <td class="sum">${sum.purchaseValuation}</td>
                     <td class="sum">${sum.currentValuation}</td>
-                    <td class="sum">${sum.changeValuation} %</td>
-                    <td class="sum">${sum.percenOfThePortfolio} %</td>
+                    <td class="sum">${sum.changeValuation} PLN</td>
+                    <td class="sum">${sum.percenOfThePortfolio}%</td>
                     <td class="sum"></td>
                 </tr>
                 <td></td>

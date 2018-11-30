@@ -10,4 +10,5 @@ public interface OperAccService {
     public void deleteById (Long id);
     public OperAcc find (Long id);
     public List<OperAcc> findAll();
+    List<OperAcc> findAllByAccountId (Long id);
 }

@@ -15,14 +15,14 @@
 
             <table class="table table-striped">
                 <tr>
-                    <th>Nazwa</th>
+                    <th>NAZWA</th>
                     <th>ISIN</th>
-                    <th>Data wyceny</th>
-                    <th>Cena</th>
-                    <th>Liczba</th>
-                    <th>Wartość</th>
-                    <th>Opis</th>
-                    <th style="width:22%">Zmiany</th>
+                    <th>DATA WYCENY</th>
+                    <th>CENA</th>
+                    <th>LICZBA</th>
+                    <th>WARTOŚĆ</th>
+                    <th>OPIS</th>
+                    <th style="width:20%">OPCJE</th>
 
                 </tr>
                 <c:forEach var="equity" items="${equities}">
@@ -48,7 +48,7 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><a href="/equ/add" class="btn btn-warning" style="width: 96%">NOWA SPÓŁKA</a></td>
+                    <td><a href="/equ/add" class="btn btn-warning" style="width: 73%">+</a></td>
                 </tr>
             </table>
         </div>

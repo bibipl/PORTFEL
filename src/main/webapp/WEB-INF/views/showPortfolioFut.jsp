@@ -10,8 +10,7 @@
 
 <body>
 <div class="container-fluid">
-    <h3 class="header">PORTFEL</h3>
-    <h4 class="header">KONTRAKTY</h4>
+    <h3 class="header">KONTRAKTY TERMINOWE</h3>
     <div class="card">
         <div class="card-body">
             <table class="table table">
@@ -25,7 +24,7 @@
                         <th>ZMIANA PTS</th>
                         <th>POCZ EKSPOZYCJA</th>
                         <th>AKT EKPOZYCJA</th>
-                        <th>ZYSK/STRATA %</th>
+                        <th>ZYSK/STRATA PLN</th>
                         <th>Struktura %</th>
                         <th style="width:5%">OPCJE</th>
                     </tr>
@@ -43,17 +42,17 @@
                         <td>${futureP.changeValuation} PLN</td>
                         <td>${futureP.percentOfTheExposure} %</td>
                         <td>
-                            <a href="/portf/hist/${futureP.id}" class="btn btn-success">HISTORIA</a>
+                            <a href="/trafu/histid/${futureP.id}" class="btn btn-success">HISTORIA</a>
                         </td>
                     </tr>
                 </c:forEach>
                 <tr>
                     <td class="sum">${sum.name}</td>
-                    <td class="sum">${sum.isin}</td>
-                    <td class="sum">${sum.numberOfContracts}</td>
-                    <td class="sum">${sum.purchasePrice}</td>
-                    <td class="sum">${sum.price}</td>
-                    <td class="sum">${sum.changepts}</td>
+                    <td class="sum"></td>
+                    <td class="sum"></td>
+                    <td class="sum"></td>
+                    <td class="sum"></td>
+                    <td class="sum"></td>
                     <td class="sum">${sum.purchaseExposure}</td>
                     <td class="sum">${sum.exposure}</td>
                     <td class="sum">${sum.changeValuation} PLN</td>

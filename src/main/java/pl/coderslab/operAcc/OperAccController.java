@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.account.Account;
 import pl.coderslab.account.AccountService;
+import pl.coderslab.tradeFu.TradeFut;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
@@ -70,5 +71,11 @@ public class OperAccController {
         }
         operAccService.update(operacc);
         return "redirect:../list";
+    }
+    @GetMapping("/histid/{id}")
+    public String tradeHistoryById (Model model, @PathVariable Long id) {
+        List<OperAcc> operAccs = operAccService.findAllByAccountId(id);
+        model.addAttribute("operAccs", operAccs);
+        return"showOperAcc";
     }
 }

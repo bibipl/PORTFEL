@@ -9,4 +9,5 @@ public interface FutureService {
     public void deleteById (Long id);
     public Future find (Long id);
     public List<Future> findAll();
+    List<Future> findByIsin(String isin);
 }

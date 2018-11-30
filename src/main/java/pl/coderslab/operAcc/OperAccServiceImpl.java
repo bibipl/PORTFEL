@@ -39,4 +39,9 @@ public class OperAccServiceImpl implements OperAccService{
     public List<OperAcc> findAll() {
         return operAccRepository.findAll();
     }
+
+    @Override
+    public List<OperAcc> findAllByAccountId(Long id) {
+        return operAccRepository.findAllByAccountId(id);
+    }
 }

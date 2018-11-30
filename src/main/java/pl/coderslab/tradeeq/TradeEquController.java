@@ -39,7 +39,7 @@ public class TradeEquController {
     public String add(Model model) {
         LocalDate today = LocalDate.now();
         LocalDate settlDay = today.plusDays(2);
-        if (today.getDayOfWeek().name()=="FRIDAY") settlDay = today.plusDays(4);
+        if (today.getDayOfWeek().name()=="FRIDAY" || today.getDayOfWeek().name()=="THURSDAY") settlDay = today.plusDays(4);
         TradeEqu tradeEqu = new TradeEqu();
         tradeEqu.setTradeDate(today);
         tradeEqu.setSettlementDate(settlDay);
@@ -81,5 +81,11 @@ public class TradeEquController {
         }
         tradeEquService.update(tradeEqu);
         return "redirect:../list";
+    }
+    @GetMapping("/histid/{id}")
+    public String tradeHistoryById (Model model, @PathVariable Long id) {
+        List<TradeEqu> eqTrades = tradeEquService.findAllByEquityId(id);
+        model.addAttribute("eqTrades", eqTrades);
+        return"showTradesEqu";
     }
 }

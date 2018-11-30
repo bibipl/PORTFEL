@@ -128,4 +128,15 @@ public class TradeEqu {
                 this.equity = equity;
         }
 
+        public void setNumber(long number) {
+                this.number = number;
+        }
+
+        public List<String> getOperEqTypes() {
+                return operEqTypes;
+        }
+
+        public void setOperEqTypes(List<String> operEqTypes) {
+                this.operEqTypes = operEqTypes;
+        }
 }

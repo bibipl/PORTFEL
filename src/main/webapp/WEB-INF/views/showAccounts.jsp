@@ -16,11 +16,11 @@
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
-                    <th>Nazwa konta</th>
-                    <th>Data ostatniej operacji</th>
-                    <th>Stan konta</th>
-                    <th>Opis</th>
-                    <th style="width:30%">Zmiany</th>
+                    <th>NAZWA KONTA</th>
+                    <th>DATA OSTATNIEJ OPERACJI</th>
+                    <th>STAN KONTA</th>
+                    <th>OPIS</th>
+                    <th style="width:23%">OPCJE</th>
 
                 </tr>
                 </thead>
@@ -31,7 +31,7 @@
                         <td>${account.value}</td>
                         <td>${account.description}</td>
                         <td>
-                            <a href="/acc/refresh" class="btn btn-success">HIS</a>
+                            <a href="/opacc/histid/${account.id}" class="btn btn-success">HIS</a>
                             <a href="/acc/edit/${account.id}" class="btn btn-success">EDY</a>
                             <a href="/acc/delete/${account.id}" class="btn btn-danger">USUŃ</a>
                         </td>
@@ -42,7 +42,7 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><a href="/acc/add" class="btn btn-warning" style="width: 87%">NOWE KONTO</a></td>
+                    <td><a href="/acc/add" class="btn btn-warning" style="width: 87%">+</a></td>
                 </tr>
             </table>
         </div>
