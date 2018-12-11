@@ -43,13 +43,13 @@ public class QuotFuController {
             return "addQuotFut";
         }
         quotFuService.save(quotesFut);
-        return "redirect:list";
+        return "redirect:/fuQ/list";
     }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
         quotFuService.deleteById(id);
-        return "redirect:../list";
+        return "redirect:/fuQ/list";
     }
 
     @GetMapping("/edit/{id}")
@@ -67,6 +67,6 @@ public class QuotFuController {
             return "addQuotFut";
         }
         quotFuService.update(quotesFut);
-        return "redirect:../list";
+        return "redirect:/fuQ/list";
     }
 }

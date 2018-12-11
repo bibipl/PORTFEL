@@ -39,13 +39,13 @@ public class EquityController {
             return "addEquity";
         }
         equityService.save(equity);
-        return "redirect:list";
+        return "redirect:/equ/list";
     }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
         equityService.deleteById(id);
-        return "redirect:../list";
+        return "redirect:/equ/list";
     }
 
     @GetMapping("/edit/{id}")
@@ -61,7 +61,7 @@ public class EquityController {
             return "addEquity";
         }
         equityService.update(equity);
-        return "redirect:../list";
+        return "redirect:/equ/list";
     }
 }
 

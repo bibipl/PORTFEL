@@ -45,13 +45,13 @@ public class OperAccController {
             return "addOperAcc";
         }
         operAccService.save(operacc);
-        return "redirect:list";
+        return "redirect:/opacc/list";
     }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
         operAccService.deleteById(id);
-        return "redirect:../list";
+        return "redirect:/opacc/list";
     }
 
     @GetMapping("/edit/{id}")
@@ -70,7 +70,7 @@ public class OperAccController {
             return "addOperAcc";
         }
         operAccService.update(operacc);
-        return "redirect:../list";
+        return "redirect:/opacc/list";
     }
     @GetMapping("/histid/{id}")
     public String tradeHistoryById (Model model, @PathVariable Long id) {

@@ -55,13 +55,13 @@ public class TradeEquController {
             return "addTradEqu";
         }
         tradeEquService.save(tradeEqu);
-        return "redirect:list";
+        return "redirect:/traeq/list";
     }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
         tradeEquService.deleteById(id);
-        return "redirect:../list";
+        return "redirect:/traeq/list";
     }
 
     @GetMapping("/edit/{id}")
@@ -80,7 +80,7 @@ public class TradeEquController {
             return "addTradEqu";
         }
         tradeEquService.update(tradeEqu);
-        return "redirect:../list";
+        return "redirect:/traeq/list";
     }
     @GetMapping("/histid/{id}")
     public String tradeHistoryById (Model model, @PathVariable Long id) {

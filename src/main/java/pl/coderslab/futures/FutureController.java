@@ -44,13 +44,13 @@ public class FutureController {
             return "addFuture";
         }
         futureService.save(future);
-        return "redirect:list";
+        return "redirect:/fut/list";
     }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
         futureService.deleteById(id);
-        return "redirect:../list";
+        return "redirect:/fut/list";
     }
 
     @GetMapping("/edit/{id}")
@@ -68,7 +68,7 @@ public class FutureController {
             return "addFuture";
         }
         futureService.update(future);
-        return "redirect:../list";
+        return "redirect:/fut/list";
     }
 
 }

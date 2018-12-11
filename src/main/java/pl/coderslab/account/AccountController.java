@@ -35,13 +35,13 @@ public class AccountController {
             return "addAccount";
         }
         accountService.save(account);
-        return "redirect:list";
+        return "redirect:/acc/list";
     }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
         accountService.deleteById(id);
-        return "redirect:../list";
+        return "redirect:/acc/list";
     }
 
     @GetMapping("/edit/{id}")
@@ -57,6 +57,6 @@ public class AccountController {
             return "addAccount";
         }
         accountService.update(account);
-        return "redirect:../list";
+        return "redirect:/acc/list";
     }
 }

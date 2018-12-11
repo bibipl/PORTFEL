@@ -10,4 +10,5 @@ public interface FutureService {
     public Future find (Long id);
     public List<Future> findAll();
     List<Future> findByIsin(String isin);
+    List<Future> findByName(String name);
 }

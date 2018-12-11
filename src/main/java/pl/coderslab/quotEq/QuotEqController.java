@@ -45,13 +45,13 @@ public class QuotEqController {
             return "addQuotEqu";
         }
         quotEqService.save(quotesEqu);
-        return "redirect:list";
+        return "redirect:/eqQ/list";
     }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
         quotEqService.deleteById(id);
-        return "redirect:../list";
+        return "redirect:/eqQ/list";
     }
 
     @GetMapping("/edit/{id}")
@@ -69,6 +69,6 @@ public class QuotEqController {
             return "addQuotEqu";
         }
         quotEqService.update(quotesEqu);
-        return "redirect:../list";
+        return "redirect:/eqQ/list";
     }
 }

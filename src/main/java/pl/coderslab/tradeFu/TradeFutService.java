@@ -9,5 +9,7 @@ public interface TradeFutService {
     public void deleteById (Long id);
     public TradeFut findById (Long id);
     public List<TradeFut> findAll();
-    List<TradeFut> findAllByFutureId (Long id);
+    List<TradeFut> findAllByFutureIdOrderByTradeDateAsc (Long id);
+    List<TradeFut> findTradeFutByTransFutTypeOrderByTradeDateAsc(Long id, String transFutType);
+
 }

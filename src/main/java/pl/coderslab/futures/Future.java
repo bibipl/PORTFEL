@@ -1,5 +1,6 @@
 package pl.coderslab.futures;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 import pl.coderslab.account.Account;
 
@@ -12,6 +13,7 @@ public class Future {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank
     private String name;
     private String isin;
     private double multiplier;

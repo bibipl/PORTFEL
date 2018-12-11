@@ -1,5 +1,7 @@
 package pl.coderslab.account;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -9,6 +11,7 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;        // id to database
+    @NotBlank
     private String Name;    // name of the account
     @Transient
     private double value;   // value of the account not ot store in db

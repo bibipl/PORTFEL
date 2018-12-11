@@ -18,7 +18,6 @@
 
         <div class="card">
             <div class="card-body">
-
                 <div class="form-group">
                     <label for="nameId">Nazwa </label>
                     <form:input type="text" path="name" id="nameId" class="form-control"/>

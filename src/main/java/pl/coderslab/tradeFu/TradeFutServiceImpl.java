@@ -40,7 +40,12 @@ public class TradeFutServiceImpl implements TradeFutService {
     }
 
     @Override
-    public List<TradeFut> findAllByFutureId(Long id) {
-        return tradeFutRepository.findAllByFutureId(id);
+    public List<TradeFut> findAllByFutureIdOrderByTradeDateAsc (Long id) {
+        return tradeFutRepository.findAllByFutureIdOrderByTradeDateAsc(id);
+    }
+
+    @Override
+    public List<TradeFut> findTradeFutByTransFutTypeOrderByTradeDateAsc(Long id, String transFutType) {
+        return tradeFutRepository.findTradeFutByTransFutTypeOrderByTradeDateAsc(id, transFutType);
     }
 }

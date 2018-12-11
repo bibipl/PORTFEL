@@ -7,5 +7,6 @@ import java.util.List;
 public interface FutureRepository extends JpaRepository<Future,Long> {
 
     List<Future> findByIsin(String isin);
+    List<Future> findByName(String name);
 
 }

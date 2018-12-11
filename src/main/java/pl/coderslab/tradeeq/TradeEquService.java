@@ -1,5 +1,7 @@
 package pl.coderslab.tradeeq;
 
+import pl.coderslab.tradeFu.TradeFut;
+
 import java.util.List;
 
 public interface TradeEquService {

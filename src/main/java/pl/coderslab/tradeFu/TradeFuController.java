@@ -57,13 +57,13 @@ public class TradeFuController {
             return "addTradeFut";
         }
         tradeFutService.save(tradeFut);
-        return "redirect:list";
+        return "redirect:/trafu/list";
     }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
         tradeFutService.deleteById(id);
-        return "redirect:../list";
+        return "redirect:/trafu/list";
     }
 
     @GetMapping("/edit/{id}")
@@ -82,11 +82,11 @@ public class TradeFuController {
             return "addTradeFut";
         }
         tradeFutService.update(tradeFut);
-        return "redirect:../list";
+        return "redirect:/trafu/list";
     }
     @GetMapping("/histid/{id}")
     public String tradeHistoryById (Model model, @PathVariable Long id) {
-        List<TradeFut> fuTrades = tradeFutService.findAllByFutureId(id);
+        List<TradeFut> fuTrades = tradeFutService.findAllByFutureIdOrderByTradeDateAsc(id);
         model.addAttribute("fuTrades", fuTrades);
         return"showTradesFut";
     }

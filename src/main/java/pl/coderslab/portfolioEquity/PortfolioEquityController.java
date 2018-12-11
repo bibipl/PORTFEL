@@ -8,11 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.Calculations.Calculator;
 import pl.coderslab.equity.Equity;
 import pl.coderslab.equity.EquityService;
-import pl.coderslab.operAcc.OperAccService;
 import pl.coderslab.quotEq.QuotEqService;
 import pl.coderslab.quotEq.QuotesEqu;
-import pl.coderslab.quotFu.QuotFuService;
-import pl.coderslab.tradeFu.TradeFutService;
 import pl.coderslab.tradeeq.TradeEqu;
 import pl.coderslab.tradeeq.TradeEquService;
 
@@ -29,15 +26,6 @@ public class PortfolioEquityController {
 
     @Autowired
     QuotEqService quotEqService;
-
-    @Autowired
-    TradeFutService tradeFutService;
-
-    @Autowired
-    QuotFuService quotFuService;
-
-    @Autowired
-    OperAccService operAccService;
 
     @Autowired
     EquityService equityService;
@@ -62,10 +50,8 @@ public class PortfolioEquityController {
             PortfEquity portfEquity = new PortfEquity();
             List<TradeEqu> equityBuy = null;
             List<TradeEqu> equitySell = null;
-            List<TradeEqu> equityFifo = null;
             String name = itEq.next();
             double valueBuy =0;
-            double valueSell = 0;
             long numberBuy=0;
             long numberSell=0;
             List<Equity> eq = equityService.findByName(name);
@@ -176,5 +162,4 @@ public class PortfolioEquityController {
         model.addAttribute("sum", totalEquity);
         return "showPortfolioEqu";
     }
-
 }

@@ -13,7 +13,7 @@
     <TABLE class="table table">
         <td class="menbut"><a href="/" class="btn btn-warning" style="width:100%">MENU</a></td>
         <td class="menbut"><a href="/cash/calculate" class="btn btn-warning" style="width: 95%">PORTFEL GOTÓWKOWY</a></td>
-        <td class="menbut"><a href="/fuPortf/calculate" class="btn btn-warning" style="width: 95%">PORTFEL KONTRAKTÓW</a></td>
+        <td class="menbut"><a href="/fuFifo/calculate/" class="btn btn-warning" style="width: 95%">PORTFEL KONTRAKTÓW</a></td>
         <td class="menbut"><a href="/eqPortf/calculate" class="btn btn-warning" style="width: 95%">PORTFEL AKCJI</a></td>
         <td></td>
         <td></td>

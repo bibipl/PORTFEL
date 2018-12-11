@@ -43,4 +43,9 @@ public class FutureServiceImpl implements FutureService {
     public List<Future> findByIsin(String isin) {
         return futuresRepository.findByIsin(isin);
     }
+
+    @Override
+    public List<Future> findByName(String name) {
+        return futuresRepository.findByName(name);
+    }
 }

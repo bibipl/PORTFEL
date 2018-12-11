@@ -1,5 +1,7 @@
 package pl.coderslab.equity;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -10,7 +12,8 @@ public class Equity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true)
-    private String isin;            // uniqe official number
+    private String isin;           // uniqe official number
+    @NotBlank
     private String name;
     private  String description;
 

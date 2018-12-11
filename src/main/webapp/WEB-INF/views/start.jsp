@@ -37,7 +37,7 @@
                 <tr>
                     <td><a href="/cash/calculate/" class="btn btn-secondary width" style="width: 100%">PORTFEL GOTÓWKA</a></td>
                     <td><a href="/eqPortf/calculate/" class="btn btn-secondary width" style="width: 100%">PORTFEL AKCJI</a></td>
-                    <td><a href="/fuPortf/calculate/" class="btn btn-secondary width" style="width: 100%">PORTFEL KONTRAKTÓW</a></td>
+                    <td><a href="/fuFifo/calculate/" class="btn btn-secondary width" style="width: 100%">PORTFEL KONTRAKTÓW</a></td>
 
                 </tr>
                 <tr>
