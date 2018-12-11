@@ -1,3 +1,4 @@
+/*
 package pl.coderslab.portfolioFutures;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +65,9 @@ public class PortfolioFuturesController {
             if (futureQuotations.size() > 0) {
                 for (QuotesFut quotesFut : futureQuotations) {
                     if (quotesFut.getFuture().getIsin().equals(portfFuture.getIsin())) {
-                        /*portfFuture.setName(quotesFut.getFuture().getName());  */     // static Future data into portfFut
+                        */
+/*portfFuture.setName(quotesFut.getFuture().getName());  *//*
+     // static Future data into portfFut
                         portfFuture.setMultiplier(quotesFut.getFuture().getMultiplier()); // static data
                         if (date == null) {
                             date = quotesFut.getDate();
@@ -154,3 +157,4 @@ public class PortfolioFuturesController {
     }
 
 }
+*/

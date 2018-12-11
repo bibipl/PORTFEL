@@ -16,6 +16,7 @@ import pl.coderslab.tradeFu.TradeFutService;
 import java.time.LocalDate;
 import java.util.*;
 
+
 @Controller
 @RequestMapping("/fuFifo")
 public class FuFifoController {
@@ -34,11 +35,61 @@ public class FuFifoController {
 //########### set initial variables ####################
         double totalFuCurrentExposure = 0;   // we need it to calculate later structure of the future portfolio (val/totalVal)
         double totalFuPurchaseExposure = 0; // in long position + in short position -
-        List<PortfFuture> fuInPortfolio = new ArrayList<>(); // list of not emptu future positions in portfolio
+
+        List<PortfFuture> fuInPortfolio = FutureWholePortfolio(); // We have unique list of not empty future positions in portfolio with all needed data
+        PortfFuture totalFuture = FutureTotalPortfolioData (fuInPortfolio);
+
+        model.addAttribute("fuPortf", fuInPortfolio);
+        model.addAttribute("sum", totalFuture);
+        return "showPortfolioFut";
+    }
+
+    // ###################################################
+    //### Method calculates a future position, that represents whole portfolio, to enable to calculate structure
+    //### of the portfolio like e.g. % exposure of each future in hte portfolio.
+    // ###################################################
+    private PortfFuture FutureTotalPortfolioData(List<PortfFuture> fuInPortfolio) {
+        double totalFuCurrentExposure = 0;
+        double totalFuPurchaseExposure = 0 ;
+
+        // Now we count the structure of the portfolio - we need whole portfolio exposure and purchase exposure.
+        if (fuInPortfolio != null) {
+            for (PortfFuture portfFuture : fuInPortfolio) {
+                totalFuCurrentExposure  += portfFuture.getExposure();
+                totalFuPurchaseExposure += portfFuture.getPurchaseExposure();
+            }
+        }
+
+        if (totalFuCurrentExposure != 0) {
+            for (PortfFuture portfFuture : fuInPortfolio) {
+                double tmpChange = (portfFuture.getExposure() / totalFuCurrentExposure * 100);
+                portfFuture.setPercentOfTheExposure(Calculator.round(tmpChange, 2));
+            }
+        }
+
+        PortfFuture totalFuture = new PortfFuture();
+        totalFuture.setName("SUMA");
+        totalFuture.setPriceDate(LocalDate.now());
+        totalFuture.setExposure(Calculator.round(totalFuCurrentExposure, 2));
+        totalFuture.setPurchaseExposure(Calculator.round(totalFuPurchaseExposure, 2));
+        if (totalFuPurchaseExposure != 0) {
+            double tmpChange = (totalFuCurrentExposure / totalFuPurchaseExposure - 1) * 100;
+            totalFuture.setChangePrice(Calculator.round(tmpChange, 2));
+        }
+        totalFuture.setChangeValuation(Calculator.round(totalFuCurrentExposure-totalFuPurchaseExposure,2));
+        totalFuture.setPercentOfTheExposure(100.00);
+        return totalFuture;
+    }
+    // ###################################################
+    //### Method calculates a list of unique names of futures and positions for each of them like number in portfolio price etc...
+    // ###################################################
+
+    public  List<PortfFuture> FutureWholePortfolio() {
+
+        List<PortfFuture> fuInPortfolio = new ArrayList<>(); // list of not empty uniqe future positions in portfolio to calculate and return
         List<TradeFut> futureTrades = tradeFutService.findAll(); // to calculate number in portfolio
         List<QuotesFut> futureQuotations = quotFuService.findAll(); // to calculate purchase price.
-
-// ########### here starts building list on not empty names (open and not closed) in portfolio
+        // ########### here starts building list on not empty names (open and not closed) in portfolio
         Set<String> futures = new TreeSet<String>();
         for (TradeFut tradeFut : futureTrades) {
             futures.add(tradeFut.getFuture().getName()); // we upload unique names alphabetically
@@ -51,12 +102,10 @@ public class FuFifoController {
             List<TradeFut> futureBuy = null;        // list for buys
             List<TradeFut> futureSell = null;       // list for sells
             String name = itFu.next();              // we take the name !!!
-            double exposureBuy = 0;                  // count purchase value (in case we are "long")
-            double exposureSell = 0;                  // count sell value (in case we are "short")
             double exposureTaken = 0;                 // final net exposure build value
-            long numberBuy=0;                       // to count # of bought "lots"
-            long numberSell=0;                      // to count # of sold "lots"
-            long numberTaken=0;                      // final net exposure number
+            long numberBuy = 0;                       // to count # of bought "lots"
+            long numberSell = 0;                      // to count # of sold "lots"
+            long numberTaken = 0;                      // final net exposure number
 
 //
             List<Future> fu = futureService.findByName(name); // we goe all data about the future in the portfolio
@@ -92,9 +141,9 @@ public class FuFifoController {
                 futureSell = tradeFutService.findTradeFutByTransFutTypeOrderByTradeDateAsc(fuOne.getId(), "SPRZEDAŻ");
 
 // If no quotes availabe (neither date or price=0, we take last available trade price (if there is any => && size >0)
-                if ((date == null || price == 0) && (futBuySell.size() >0)) {
-                    date = futBuySell.get(futBuySell.size()-1).getTradeDate();
-                    price = futBuySell.get(futBuySell.size()-1).getPrice();
+                if ((date == null || price == 0) && (futBuySell.size() > 0)) {
+                    date = futBuySell.get(futBuySell.size() - 1).getTradeDate();
+                    price = futBuySell.get(futBuySell.size() - 1).getPrice();
                 }
 // still if no trade price or date available on e.g error or wrong data input, there can be price=0 and date = null
 
@@ -123,7 +172,8 @@ public class FuFifoController {
                                 double difference = tradeB.getNumber() - numberSell;
                                 numberTaken += difference;
                                 exposureTaken += difference * tradeB.getPrice() * tradeB.getFuture().getMultiplier();
-                                if (numberBuy != 0) exposureTaken += (1 - numberSell / numberBuy) * tradeB.getCommision();
+                                if (numberBuy != 0)
+                                    exposureTaken += (1 - numberSell / numberBuy) * tradeB.getCommision();
                                 else {
                                     exposureTaken += tradeB.getCommision();
                                     numberSell = 0;
@@ -133,7 +183,7 @@ public class FuFifoController {
                             }
                         } else {
                             numberTaken += tradeB.getNumber();
-                            exposureTaken += tradeB.getPrice() * tradeB.getNumber() * tradeB.getFuture().getMultiplier()+ tradeB.getCommision();
+                            exposureTaken += tradeB.getPrice() * tradeB.getNumber() * tradeB.getFuture().getMultiplier() + tradeB.getCommision();
                         }
                     }
                 } else if (numberBuy < numberSell) {
@@ -146,7 +196,8 @@ public class FuFifoController {
                                 double difference = tradeS.getNumber() - numberBuy;
                                 numberTaken -= difference;
                                 exposureTaken -= difference * tradeS.getPrice() * tradeS.getFuture().getMultiplier();
-                                if (numberSell != 0) exposureTaken += (1- (double)numberBuy / numberSell) * tradeS.getCommision(); // part of the commision
+                                if (numberSell != 0)
+                                    exposureTaken += (1 - (double) numberBuy / numberSell) * tradeS.getCommision(); // part of the commision
                                 else {
                                     exposureTaken += tradeS.getCommision(); // the whole commission if no buys
                                     numberBuy = 0;
@@ -161,51 +212,23 @@ public class FuFifoController {
                         }
                     }
                 }
-
                 // ### now we fill portfolio position row :
                 portfFuture.setNumberOfContracts(numberTaken);
                 portfFuture.setPurchaseExposure(Calculator.round(exposureTaken, 2));
 
-                    if (numberTaken != 0 && portfFuture.getMultiplier() != 0) {
-                        portfFuture.setPurchasePrice(Calculator.round(exposureTaken / numberTaken / portfFuture.getMultiplier(), 2));
-                    }
+                if (numberTaken != 0 && portfFuture.getMultiplier() != 0) {
+                    portfFuture.setPurchasePrice(Calculator.round(exposureTaken / numberTaken / portfFuture.getMultiplier(), 2));
+                }
 
-                portfFuture.setExposure(Calculator.round(portfFuture.getPrice()*numberTaken*portfFuture.getMultiplier(),2));
-                portfFuture.setChangepts(Calculator.round((portfFuture.getPrice()-portfFuture.getPurchasePrice()),2));
-                portfFuture.setChangeValuation(Calculator.round(portfFuture.getExposure() - portfFuture.getPurchaseExposure(),2));
+                portfFuture.setExposure(Calculator.round(portfFuture.getPrice() * numberTaken * portfFuture.getMultiplier(), 2));
+                portfFuture.setChangepts(Calculator.round((portfFuture.getPrice() - portfFuture.getPurchasePrice()), 2));
+                portfFuture.setChangeValuation(Calculator.round(portfFuture.getExposure() - portfFuture.getPurchaseExposure(), 2));
 
                 // Complete portfFuture position. The question : do we have <>0 number in portfolio ??
                 // if yes, lets update prices and valuations
-
-                if (numberTaken != 0) {
-                    fuInPortfolio.add(portfFuture);
-                    totalFuPurchaseExposure += portfFuture.getPurchaseExposure();
-                    totalFuCurrentExposure += portfFuture.getExposure();
-                }
             }
+            fuInPortfolio.add(portfFuture);
         } // end of While iterator - if it end we have all positions in portfolio.
-
-        // Now we count the structure of the portfolio
-        if (totalFuCurrentExposure != 0) {
-            for (PortfFuture portfFuture : fuInPortfolio) {
-                double tmpChange = (portfFuture.getExposure() / totalFuCurrentExposure * 100);
-                portfFuture.setPercentOfTheExposure(Calculator.round(tmpChange, 2));
-            }
-        }
-        PortfFuture totalFuture = new PortfFuture();
-        totalFuture.setName("SUMA");
-        totalFuture.setPriceDate(LocalDate.now());
-        totalFuture.setExposure(Calculator.round(totalFuCurrentExposure, 2));
-        totalFuture.setPurchaseExposure(Calculator.round(totalFuPurchaseExposure, 2));
-        if (totalFuPurchaseExposure != 0) {
-            double tmpChange = (totalFuCurrentExposure / totalFuPurchaseExposure - 1) * 100;
-            totalFuture.setChangePrice(Calculator.round(tmpChange, 2));
-        }
-        totalFuture.setChangeValuation(Calculator.round(totalFuCurrentExposure-totalFuPurchaseExposure,2));
-        totalFuture.setPercentOfTheExposure(100.00);
-
-        model.addAttribute("fuPortf", fuInPortfolio);
-        model.addAttribute("sum", totalFuture);
-        return "showPortfolioFut";
+        return (fuInPortfolio);
     }
 }
