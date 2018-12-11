@@ -33,22 +33,21 @@ public class FuFifoController {
     @GetMapping("/calculate")
     public String porfolio (Model model) {
 //########### set initial variables ####################
-        double totalFuCurrentExposure = 0;   // we need it to calculate later structure of the future portfolio (val/totalVal)
-        double totalFuPurchaseExposure = 0; // in long position + in short position -
 
         List<PortfFuture> fuInPortfolio = FutureWholePortfolio(); // We have unique list of not empty future positions in portfolio with all needed data
-        PortfFuture totalFuture = FutureTotalPortfolioData (fuInPortfolio);
+        PortfFuture totalFuture = FutureTotalPortfolioData (fuInPortfolio); // We have total portfolio calculations
 
         model.addAttribute("fuPortf", fuInPortfolio);
         model.addAttribute("sum", totalFuture);
         return "showPortfolioFut";
     }
 
-    // ###################################################
-    //### Method calculates a future position, that represents whole portfolio, to enable to calculate structure
-    //### of the portfolio like e.g. % exposure of each future in hte portfolio.
-    // ###################################################
+    //##############################################################################################################
+    //### Method calculates a future position, that represents whole portfolio, to enable to calculate structure ###
+    //### of the portfolio like e.g. % exposure of each future in hte portfolio.                                 ###
+    //##############################################################################################################
     private PortfFuture FutureTotalPortfolioData(List<PortfFuture> fuInPortfolio) {
+        //fuINPortfolio is filled with right positions
         double totalFuCurrentExposure = 0;
         double totalFuPurchaseExposure = 0 ;
 
@@ -72,31 +71,32 @@ public class FuFifoController {
         totalFuture.setPriceDate(LocalDate.now());
         totalFuture.setExposure(Calculator.round(totalFuCurrentExposure, 2));
         totalFuture.setPurchaseExposure(Calculator.round(totalFuPurchaseExposure, 2));
-        if (totalFuPurchaseExposure != 0) {
-            double tmpChange = (totalFuCurrentExposure / totalFuPurchaseExposure - 1) * 100;
-            totalFuture.setChangePrice(Calculator.round(tmpChange, 2));
+        if (totalFuPurchaseExposure != 0) { // calculation of change of value o fpositions
+            totalFuture.setChangePrice(Calculator.round(((totalFuCurrentExposure / totalFuPurchaseExposure - 1) * 100), 2));
         }
         totalFuture.setChangeValuation(Calculator.round(totalFuCurrentExposure-totalFuPurchaseExposure,2));
         totalFuture.setPercentOfTheExposure(100.00);
         return totalFuture;
     }
-    // ###################################################
-    //### Method calculates a list of unique names of futures and positions for each of them like number in portfolio price etc...
-    // ###################################################
 
+    //##############################################################################################################
+    //### Method calculates a list of unique names of futures and positions for each of them                     ###
+    //### like number in portfolio price etc...                                                                  ###
+    //##############################################################################################################
     public  List<PortfFuture> FutureWholePortfolio() {
 
         List<PortfFuture> fuInPortfolio = new ArrayList<>(); // list of not empty uniqe future positions in portfolio to calculate and return
         List<TradeFut> futureTrades = tradeFutService.findAll(); // to calculate number in portfolio
         List<QuotesFut> futureQuotations = quotFuService.findAll(); // to calculate purchase price.
-        // ########### here starts building list on not empty names (open and not closed) in portfolio
+
+        // ########### here starts building list of not empty names (open and not closed) in portfolio
         Set<String> futures = new TreeSet<String>();
         for (TradeFut tradeFut : futureTrades) {
             futures.add(tradeFut.getFuture().getName()); // we upload unique names alphabetically
         }
-        Iterator<String> itFu = futures.iterator(); // and prepare take on by one to search transactions
+        Iterator<String> itFu = futures.iterator(); // and prepare to take one by one to search transactions
 
-//######### we take name (one by one) and find all transactions for it
+        //######### we take name (one by one) and find all transactions for it
         while (itFu.hasNext()) {
             PortfFuture portfFuture = new PortfFuture();
             List<TradeFut> futureBuy = null;        // list for buys
@@ -107,17 +107,17 @@ public class FuFifoController {
             long numberSell = 0;                      // to count # of sold "lots"
             long numberTaken = 0;                      // final net exposure number
 
-//
-            List<Future> fu = futureService.findByName(name); // we goe all data about the future in the portfolio
-            if (fu.size() > 0) {    // when there is at least one future of specified name
+        // W find the future (got from transactions) in the future static data of Future class) and fill portfolio position with data
+            List<Future> fu = futureService.findByName(name); // we get all data of current future in the portfolio
+            if (fu.size() > 0) {                        // when there is at least one future of specified name
                 Future fuOne = fu.get(0);               // Then there shuould be exactly one future with the specified, unique name
                 portfFuture.setId(fuOne.getId());       // We initiate portfolio position with static data
-                portfFuture.setName((fuOne.getName())); // we put static data to display to the portfolio
-                portfFuture.setIsin((fuOne.getIsin())); // we put static data to display to the portfolio
-                portfFuture.setMultiplier(fuOne.getMultiplier());
+                portfFuture.setName((fuOne.getName())); // we put static data to display to the portfolio - name of future
+                portfFuture.setIsin((fuOne.getIsin())); // we put static data to display to the portfolio - isin of future
+                portfFuture.setMultiplier(fuOne.getMultiplier()); // multiplir of the future (eg. x20)
 
-                LocalDate date = null; // we want to know the lters available pricing date
-                double price = 0;      // and the latest available price value
+                LocalDate date = null; // we want to find the latest available pricing date
+                double price = 0;      // and the latest available price value (from quotes or if not available then from trades)
 
                 //### find the newest quotation date
                 //Now we are going to find the latest quotation for specifies future
@@ -172,8 +172,9 @@ public class FuFifoController {
                                 double difference = tradeB.getNumber() - numberSell;
                                 numberTaken += difference;
                                 exposureTaken += difference * tradeB.getPrice() * tradeB.getFuture().getMultiplier();
-                                if (numberBuy != 0)
-                                    exposureTaken += (1 - numberSell / numberBuy) * tradeB.getCommision();
+                                if (numberBuy != 0) {
+                                    exposureTaken += (1 - (double) numberSell / tradeB.getNumber()) * tradeB.getCommision();
+                                }
                                 else {
                                     exposureTaken += tradeB.getCommision();
                                     numberSell = 0;
@@ -197,7 +198,7 @@ public class FuFifoController {
                                 numberTaken -= difference;
                                 exposureTaken -= difference * tradeS.getPrice() * tradeS.getFuture().getMultiplier();
                                 if (numberSell != 0)
-                                    exposureTaken += (1 - (double) numberBuy / numberSell) * tradeS.getCommision(); // part of the commision
+                                    exposureTaken += (1 - (double) numberBuy / tradeS.getNumber()) * tradeS.getCommision(); // part of the commision
                                 else {
                                     exposureTaken += tradeS.getCommision(); // the whole commission if no buys
                                     numberBuy = 0;
