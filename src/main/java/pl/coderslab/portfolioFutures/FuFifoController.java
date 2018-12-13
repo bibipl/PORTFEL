@@ -173,6 +173,7 @@ public class FuFifoController {
                                 numberTaken += difference;
                                 exposureTaken += difference * tradeB.getPrice() * tradeB.getFuture().getMultiplier();
                                 if (numberBuy != 0) {
+                                    // we calculate commision as a part of trade that has not been covered by opposite sell trade
                                     exposureTaken += (1 - (double) numberSell / tradeB.getNumber()) * tradeB.getCommision();
                                 }
                                 else {
